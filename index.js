@@ -1,5 +1,8 @@
 import express, { json } from "express"
 import mongoose from "mongoose"
+import { config } from "dotenv"
+
+config();
 
 const app = express();
 const port = 3000;
@@ -11,6 +14,8 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+
 
 mongoose
   .connect(process.env.mongodb, {
