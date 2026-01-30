@@ -1,4 +1,5 @@
 import express, { json } from "express"
+import mongoose from "mongoose"
 
 const app = express();
 const port = 3000;
@@ -10,5 +11,22 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+mongoose
+  .connect(process.env.mongodb, {
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
+      // useCreateIndex: true,
+      serverSelectionTimeoutMS: 30000,
+      socketTimeoutMS: 45000,
+  })
+  .then(() => console.log('Database is connected'))
+  .catch((error) => console.error('Database connection error', error))
+
+app.get('/api', (req, res) => {
+  return res.status(201).send({
+    name: 'Oxcode'
+  });
+})
 
 app.use(express.json());
