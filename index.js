@@ -1,5 +1,5 @@
 import express, { json } from "express"
-// import mongoose from "mongoose"
+import mongoose from "mongoose"
 import { config } from "dotenv"
 // import statesRouter from "./routes/statesRouter.js"
 // import lgasRouter from "./routes/lgasRouter.js"
@@ -24,16 +24,16 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-// mongoose
-//   .connect(process.env.mongodb, {
-//       // useNewUrlParser: true,
-//       // useUnifiedTopology: true,
-//       // useCreateIndex: true,
-//       serverSelectionTimeoutMS: 30000,
-//       socketTimeoutMS: 45000,
-//   })
-//   .then(() => console.log('Database is connected'))
-//   .catch((error) => console.error('Database connection error', error))
+mongoose
+  .connect(process.env.mongodb, {
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
+      // useCreateIndex: true,
+      serverSelectionTimeoutMS: 30000,
+      socketTimeoutMS: 45000,
+  })
+  .then(() => console.log('Database is connected'))
+  .catch((error) => console.error('Database connection error', error))
 
 // app.use(express.json());
 
