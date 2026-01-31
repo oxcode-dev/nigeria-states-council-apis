@@ -5,7 +5,7 @@ import { config } from "dotenv"
 // import lgasRouter from "./routes/lgasRouter.js"
 // import wardsRouter from "./routes/wardsRouter.js"
 import bodyParser from "body-parser";
-// import { State } from "./models/State.js";
+import { State } from "./models/State.js";
 
 config();
 
@@ -41,11 +41,11 @@ app.use(express.json());
 app.get('/api', async(req, res) => {
 
     try {
-        return res.status(201).send('Hello World');
+        // return res.status(201).send('Hello World');
 
-        // const states = await State.find();
+        const states = await State.find();
 
-        // return res.status(201).send(states);
+        return res.status(201).send(states);
     }
     catch (error) {
         console.log(error)
