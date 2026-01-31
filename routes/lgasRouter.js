@@ -10,14 +10,14 @@ router.get('/', async(req, res) => {
         const db = mongoose.connection.db;
 
         // Use listCollections() to get a cursor, then convert to an array
-        const collections = await db.listCollections().toArray();
+        // const collections = await db.listCollections().toArray();
 
-        return res.status(201).send((collections));
+        // return res.status(201).send((collections));
 
         const lgas = await LocalGovt.find();
 
-        return res.status(201).send('hello');
-        // return res.status(201).send(lgas);
+        // return res.status(201).send('hello');
+        return res.status(201).send(lgas);
     }
     catch (error) {
         console.log(error)
