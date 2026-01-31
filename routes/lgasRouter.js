@@ -1,5 +1,5 @@
 import express from "express"
-import { LocalGovt } from "../models/lga";
+import { LocalGovt } from "../models/lga.js";
 
 const router = express.Router();
 

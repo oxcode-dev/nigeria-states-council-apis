@@ -2,6 +2,7 @@ import express, { json } from "express"
 import mongoose from "mongoose"
 import { config } from "dotenv"
 import statesRouter from "./routes/statesRouter.js"
+import lgasRouter from "./routes/lgasRouter.js"
 import bodyParser from "body-parser";
 
 config();
@@ -36,3 +37,4 @@ mongoose
 app.use(express.json());
 
 app.use('/api/states', statesRouter)
+app.use('/api/lgas', lgasRouter)
