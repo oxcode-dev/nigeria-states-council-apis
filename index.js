@@ -34,6 +34,18 @@ mongoose
   .then(() => console.log('Database is connected'))
   .catch((error) => console.error('Database connection error', error))
 
+app.get('/api/collections', (req, res) => {
+  // Method 1: Using listCollections (as with native driver)
+  mongoose.connection.db.listCollections().toArray((error, collections) => {
+    if (error) {
+      console.error('Error retrieving collections:', error);
+      return res.status(500).send('Error retrieving collection names');
+    }
+    const collectionNames = collections.map(collection => collection.name);
+    res.status(200).json({ collections: collectionNames });
+  });
+});
+
 app.use(express.json());
 
 app.use('/api/states', statesRouter)
