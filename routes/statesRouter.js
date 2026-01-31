@@ -1,5 +1,5 @@
 import express from "express"
-import { State } from "../models/State.js";
+import { State } from "../models/state.js";
 
 const router = express.Router();
 
