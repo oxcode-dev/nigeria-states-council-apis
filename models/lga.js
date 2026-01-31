@@ -14,4 +14,4 @@ const localGovtSchema = mongoose.Schema({
     // },
 })
 
-export const State = mongoose.model("LocalGovt", localGovtSchema);
+export const LocalGovt = mongoose.model("LocalGovt", localGovtSchema);

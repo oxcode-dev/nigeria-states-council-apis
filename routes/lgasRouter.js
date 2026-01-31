@@ -1,14 +1,14 @@
 import express from "express"
-import { State } from "../models/State.js";
+import { LocalGovt } from "../models/lga";
 
 const router = express.Router();
 
 router.get('/', async(req, res) => {
 
     try {
-        const states = await State.find();
+        const lgas = await LocalGovt.find();
 
-        return res.status(201).send(states);
+        return res.status(201).send(lgas);
     }
     catch (error) {
         console.log(error)
@@ -28,7 +28,7 @@ router.post('/', async (request, response) => {
             })
         }
 
-        const newState = {
+        const newLga = {
             name: formData.name,
             bio: formData.bio,
             code: formData.code,
@@ -36,9 +36,9 @@ router.post('/', async (request, response) => {
             zone: formData.zone,
         }
 
-        const state = await State.create(newState);
+        const lga = await LocalGovt.create(newLga);
 
-        return response.status(201).send(state);
+        return response.status(201).send(lga);
     }
     catch (error) {
         console.log(error)
@@ -50,9 +50,9 @@ router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const state = await State.findById(id);
+        const lga = await LocalGovt.findById(id);
 
-        return response.status(201).send(state);
+        return response.status(201).send(lga);
     }
     catch (error) {
         console.log(error)
@@ -64,16 +64,16 @@ router.delete('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const result = await State.findByIdAndDelete(id);
+        const result = await LocalGovt.findByIdAndDelete(id);
 
         if(!result) {
             return response.status(404).send({
-                message: "State not found!",
+                message: "Local Government not found!",
             })
         }
 
         return response.status(201).send({
-            message: 'State successfully deleted!!!',
+            message: 'Local Government successfully deleted!!!',
             deletedItem: result,
         });
     }
@@ -97,7 +97,7 @@ router.put('/:id', async (request, response) => {
             })
         }
 
-        const updatedState = {
+        const updatedLocalGovt = {
             name: formData.name,
             bio: formData.bio,
             code: formData.code,
@@ -105,11 +105,11 @@ router.put('/:id', async (request, response) => {
             zone: formData.zone,
         }
 
-        const result = await State.findByIdAndUpdate(id, updatedState, { new: true});
+        const result = await LocalGovt.findByIdAndUpdate(id, updatedLocalGovt, { new: true});
 
         if(!result) {
             return response.status(404).send({
-                message: "State not found!",
+                message: "Local Government not found!",
             })
         }
 
