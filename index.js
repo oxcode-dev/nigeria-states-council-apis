@@ -2,11 +2,17 @@ import express, { json } from "express"
 import mongoose from "mongoose"
 import { config } from "dotenv"
 import statesRouter from "./routes/statesRouter.js"
+import bodyParser from "body-parser";
 
 config();
 
 const app = express();
 const port = 3000;
+
+// Middleware to parse JSON data
+app.use(bodyParser.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
   res.send('Hello World from Express!', req);
@@ -15,8 +21,6 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
-app.use('/api/states', statesRouter)
 
 mongoose
   .connect(process.env.mongodb, {
@@ -30,3 +34,5 @@ mongoose
   .catch((error) => console.error('Database connection error', error))
 
 app.use(express.json());
+
+app.use('/api/states', statesRouter)
