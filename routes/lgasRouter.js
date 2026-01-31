@@ -1,22 +1,14 @@
 import express from "express"
 import { LocalGovt } from "../models/lga.js";
-import mongoose from "mongoose"
 
 const router = express.Router();
 
 router.get('/', async(req, res) => {
 
     try {
-        const db = mongoose.connection.db;
-
-        // Use listCollections() to get a cursor, then convert to an array
-        // const collections = await db.listCollections().toArray();
-
-        // return res.status(201).send((collections));
 
         const lgas = await LocalGovt.find();
 
-        // return res.status(201).send('hello');
         return res.status(201).send(lgas);
     }
     catch (error) {

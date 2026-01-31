@@ -1,23 +1,14 @@
 import express from "express"
-import { LocalGovt } from "../models/lga.js";
-import mongoose from "mongoose"
+import { Ward } from "../models/ward.js";
 
 const router = express.Router();
 
 router.get('/', async(req, res) => {
 
     try {
-        // const db = mongoose.connection.db;
+        const wards = await Ward.find();
 
-        // Use listCollections() to get a cursor, then convert to an array
-        // const collections = await db.listCollections().toArray();
-
-        // return res.status(201).send((collections));
-
-        const lgas = await LocalGovt.find();
-
-        // return res.status(201).send('hello');
-        return res.status(201).send(lgas);
+        return res.status(201).send(wards);
     }
     catch (error) {
         console.log(error)
@@ -37,7 +28,7 @@ router.post('/', async (request, response) => {
             })
         }
 
-        const newLga = {
+        const newWard = {
             name: formData.name,
             bio: formData.bio,
             code: formData.code,
@@ -45,9 +36,9 @@ router.post('/', async (request, response) => {
             zone: formData.zone,
         }
 
-        const lga = await LocalGovt.create(newLga);
+        const ward = await Ward.create(newWard);
 
-        return response.status(201).send(lga);
+        return response.status(201).send(ward);
     }
     catch (error) {
         console.log(error)
@@ -59,9 +50,9 @@ router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const lga = await LocalGovt.findById(id);
+        const ward = await Ward.findById(id);
 
-        return response.status(201).send(lga);
+        return response.status(201).send(ward);
     }
     catch (error) {
         console.log(error)
@@ -73,16 +64,16 @@ router.delete('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const result = await LocalGovt.findByIdAndDelete(id);
+        const result = await Ward.findByIdAndDelete(id);
 
         if(!result) {
             return response.status(404).send({
-                message: "Local Government not found!",
+                message: "Ward not found!",
             })
         }
 
         return response.status(201).send({
-            message: 'Local Government successfully deleted!!!',
+            message: 'Ward successfully deleted!!!',
             deletedItem: result,
         });
     }
@@ -106,7 +97,7 @@ router.put('/:id', async (request, response) => {
             })
         }
 
-        const updatedLocalGovt = {
+        const updatedWard = {
             name: formData.name,
             bio: formData.bio,
             code: formData.code,
@@ -114,11 +105,11 @@ router.put('/:id', async (request, response) => {
             zone: formData.zone,
         }
 
-        const result = await LocalGovt.findByIdAndUpdate(id, updatedLocalGovt, { new: true});
+        const result = await Ward.findByIdAndUpdate(id, updatedWard, { new: true});
 
         if(!result) {
             return response.status(404).send({
-                message: "Local Government not found!",
+                message: "Ward not found!",
             })
         }
 
