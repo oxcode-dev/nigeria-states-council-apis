@@ -83,40 +83,42 @@ router.delete('/:id', async (request, response) => {
     }
 })
 
-// router.put('/:id', auth, async (request, response) => {
-//     try {
-//         const { id } = request.params;
+router.put('/:id', async (request, response) => {
+    try {
+        const { id } = request.params;
 
-//         const formData = request.body;
-//         if(
-//             !formData.name || !formData.priceInCents || !formData.category
-//         ) {
-//             return response.status(400).send({
-//                 message: "Required fields are missing!",
-//             })
-//         }
+        const formData = request.body;
+        if(
+            !formData.name || !formData.code || 
+            !formData.zone || !formData.slogan
+        ) {
+            return response.status(400).send({
+                message: "Required fields are missing!",
+            })
+        }
 
-//         const updatedProduct = {
-//             name: formData.name,
-//             priceInCents: formData.priceInCents,
-//             category: formData.category,
-//             description: formData.description,
-//         }
+        const updatedState = {
+            name: formData.name,
+            bio: formData.bio,
+            code: formData.code,
+            slogan: formData.slogan,
+            zone: formData.zone,
+        }
 
-//         const result = await Product.findByIdAndUpdate(id, updatedProduct, { new: true});
+        const result = await State.findByIdAndUpdate(id, updatedState, { new: true});
 
-//         if(!result) {
-//             return response.status(404).send({
-//                 message: "Product not found!",
-//             })
-//         }
+        if(!result) {
+            return response.status(404).send({
+                message: "State not found!",
+            })
+        }
 
-//         return response.status(201).send(result);
-//     }
-//     catch (error) {
-//         console.log(error)
-//         response.status(500).send({ message: error.message })
-//     }
-// })
+        return response.status(201).send(result);
+    }
+    catch (error) {
+        console.log(error)
+        response.status(500).send({ message: error.message })
+    }
+})
 
 export default router;
