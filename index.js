@@ -1,6 +1,7 @@
 import express, { json } from "express"
 import mongoose from "mongoose"
 import { config } from "dotenv"
+import statesRouter from "./routes/statesRouter.js"
 
 config();
 
@@ -15,7 +16,7 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-
+app.use('/api/states', statesRouter)
 
 mongoose
   .connect(process.env.mongodb, {
