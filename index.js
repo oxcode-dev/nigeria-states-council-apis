@@ -5,7 +5,7 @@ import { config } from "dotenv"
 // import lgasRouter from "./routes/lgasRouter.js"
 // import wardsRouter from "./routes/wardsRouter.js"
 import bodyParser from "body-parser";
-import { State } from "./models/State.js";
+// import { State } from "./models/State.js";
 
 config();
 
