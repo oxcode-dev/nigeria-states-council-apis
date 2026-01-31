@@ -28,10 +28,4 @@ mongoose
   .then(() => console.log('Database is connected'))
   .catch((error) => console.error('Database connection error', error))
 
-app.get('/api', (req, res) => {
-  return res.status(201).send({
-    name: 'Oxcode'
-  });
-})
-
 app.use(express.json());
