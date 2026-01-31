@@ -18,7 +18,6 @@ router.get('/', async(req, res) => {
 
 router.post('/', async (request, response) => {
     try {
-        return response.status(201).send(request);
         const formData = request.body;
         if(
             !formData.name || !formData.code || 
