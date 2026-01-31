@@ -1,7 +1,7 @@
 import express from "express"
 import mongoose from "mongoose"
 import { config } from "dotenv"
-import statesRouter from "./routes/statesRouter.js"
+// import statesRouter from "./routes/statesRouter.js"
 // import lgasRouter from "./routes/lgasRouter.js"
 // import wardsRouter from "./routes/wardsRouter.js"
 import bodyParser from "body-parser";
