@@ -50,9 +50,9 @@ router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const product = await Product.findById(id);
+        const state = await State.findById(id);
 
-        return response.status(201).send(product);
+        return response.status(201).send(state);
     }
     catch (error) {
         console.log(error)
@@ -60,20 +60,20 @@ router.get('/:id', async (request, response) => {
     }
 })
 
-router.delete('/:id', auth, async (request, response) => {
+router.delete('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const result = await Product.findByIdAndDelete(id);
+        const result = await State.findByIdAndDelete(id);
 
         if(!result) {
             return response.status(404).send({
-                message: "Product not found!",
+                message: "State not found!",
             })
         }
 
         return response.status(201).send({
-            message: 'Product successfully deleted!!!',
+            message: 'State successfully deleted!!!',
             deletedItem: result,
         });
     }
@@ -83,40 +83,40 @@ router.delete('/:id', auth, async (request, response) => {
     }
 })
 
-router.put('/:id', auth, async (request, response) => {
-    try {
-        const { id } = request.params;
+// router.put('/:id', auth, async (request, response) => {
+//     try {
+//         const { id } = request.params;
 
-        const formData = request.body;
-        if(
-            !formData.name || !formData.priceInCents || !formData.category
-        ) {
-            return response.status(400).send({
-                message: "Required fields are missing!",
-            })
-        }
+//         const formData = request.body;
+//         if(
+//             !formData.name || !formData.priceInCents || !formData.category
+//         ) {
+//             return response.status(400).send({
+//                 message: "Required fields are missing!",
+//             })
+//         }
 
-        const updatedProduct = {
-            name: formData.name,
-            priceInCents: formData.priceInCents,
-            category: formData.category,
-            description: formData.description,
-        }
+//         const updatedProduct = {
+//             name: formData.name,
+//             priceInCents: formData.priceInCents,
+//             category: formData.category,
+//             description: formData.description,
+//         }
 
-        const result = await Product.findByIdAndUpdate(id, updatedProduct, { new: true});
+//         const result = await Product.findByIdAndUpdate(id, updatedProduct, { new: true});
 
-        if(!result) {
-            return response.status(404).send({
-                message: "Product not found!",
-            })
-        }
+//         if(!result) {
+//             return response.status(404).send({
+//                 message: "Product not found!",
+//             })
+//         }
 
-        return response.status(201).send(result);
-    }
-    catch (error) {
-        console.log(error)
-        response.status(500).send({ message: error.message })
-    }
-})
+//         return response.status(201).send(result);
+//     }
+//     catch (error) {
+//         console.log(error)
+//         response.status(500).send({ message: error.message })
+//     }
+// })
 
 export default router;
