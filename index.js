@@ -37,6 +37,21 @@ mongoose
 
 app.use(express.json());
 
-app.use('/api/states', statesRouter)
+app.get('/api', async(req, res) => {
+
+    try {
+        return res.status(201).send('Hello World');
+
+        const states = await State.find();
+
+        return res.status(201).send(states);
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).send({ message: error.message })
+    }
+})
+
+// app.use('/api/states', statesRouter)
 // app.use('/api/lgas', lgasRouter)
 // app.use('/api/wards', wardsRouter)
