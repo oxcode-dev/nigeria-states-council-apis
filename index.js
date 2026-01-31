@@ -43,9 +43,9 @@ app.get('/api', async(req, res) => {
     try {
         return res.status(201).send('Hello World');
 
-        const states = await State.find();
+        // const states = await State.find();
 
-        return res.status(201).send(states);
+        // return res.status(201).send(states);
     }
     catch (error) {
         console.log(error)
