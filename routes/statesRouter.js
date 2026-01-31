@@ -46,4 +46,77 @@ router.post('/', async (request, response) => {
     }
 })
 
+router.get('/:id', async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const product = await Product.findById(id);
+
+        return response.status(201).send(product);
+    }
+    catch (error) {
+        console.log(error)
+        response.status(500).send({ message: error.message })
+    }
+})
+
+router.delete('/:id', auth, async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const result = await Product.findByIdAndDelete(id);
+
+        if(!result) {
+            return response.status(404).send({
+                message: "Product not found!",
+            })
+        }
+
+        return response.status(201).send({
+            message: 'Product successfully deleted!!!',
+            deletedItem: result,
+        });
+    }
+    catch (error) {
+        console.log(error)
+        response.status(500).send({ message: error.message })
+    }
+})
+
+router.put('/:id', auth, async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const formData = request.body;
+        if(
+            !formData.name || !formData.priceInCents || !formData.category
+        ) {
+            return response.status(400).send({
+                message: "Required fields are missing!",
+            })
+        }
+
+        const updatedProduct = {
+            name: formData.name,
+            priceInCents: formData.priceInCents,
+            category: formData.category,
+            description: formData.description,
+        }
+
+        const result = await Product.findByIdAndUpdate(id, updatedProduct, { new: true});
+
+        if(!result) {
+            return response.status(404).send({
+                message: "Product not found!",
+            })
+        }
+
+        return response.status(201).send(result);
+    }
+    catch (error) {
+        console.log(error)
+        response.status(500).send({ message: error.message })
+    }
+})
+
 export default router;
