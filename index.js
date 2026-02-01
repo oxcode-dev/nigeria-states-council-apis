@@ -5,11 +5,14 @@ import statesRouter from "./routes/statesRouter.js"
 import lgasRouter from "./routes/lgasRouter.js"
 import wardsRouter from "./routes/wardsRouter.js"
 import bodyParser from "body-parser";
+import cors from "cors"
 
 config();
 
 const app = express();
 const port = 3000;
+
+app.use(cors());
 
 // Middleware to parse JSON data
 app.use(bodyParser.json());
