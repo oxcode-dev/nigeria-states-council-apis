@@ -6,6 +6,7 @@ import lgasRouter from "./routes/lgasRouter.js"
 import wardsRouter from "./routes/wardsRouter.js"
 import bodyParser from "body-parser";
 import cors from "cors"
+import { authRouter } from "./controllers/authController.js"
 
 config();
 
@@ -43,3 +44,4 @@ app.use(express.json());
 app.use('/api/states', statesRouter)
 app.use('/api/lgas', lgasRouter)
 app.use('/api/wards', wardsRouter)
+app.use('/auth', authRouter)
