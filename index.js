@@ -44,4 +44,4 @@ app.use(express.json());
 app.use('/api/states', statesRouter)
 app.use('/api/lgas', lgasRouter)
 app.use('/api/wards', wardsRouter)
-app.use('/auth', authRouter)
+app.use('/api/auth', authRouter)
