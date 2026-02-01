@@ -28,7 +28,16 @@ router.post('/register', async (req, res) => {
 
         const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: '1h'});
 
-        return res.status(201).json({ token, message: 'User registered successfully'})
+        return res.status(201).json({
+            token, 
+            message: 'User registered successfully', 
+            user: { 
+                id: savedUser._id,
+                email: savedUser.email, 
+                first_name: savedUser.first_name, 
+                last_name: savedUser.last_name 
+            }
+        });
 
     } catch (error) {
         console.error(error)
@@ -62,7 +71,13 @@ router.post('/login', async (req, res) => {
 
                     res.json({
                         token,
-                        user: {id: user._id, email: user.email }
+                        user: {
+                            id: user._id,
+                            email: user.email,
+                            first_name: user.first_name,
+                            last_name: user.last_name
+                        },
+                        message: 'Login successful'
                     })
                 }
             );
