@@ -29,17 +29,6 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-// mongoose
-//   .connect(process.env.mongodb, {
-//       // useNewUrlParser: true,
-//       // useUnifiedTopology: true,
-//       // useCreateIndex: true,
-//       serverSelectionTimeoutMS: 30000,
-//       socketTimeoutMS: 45000,
-//   })
-//   .then(() => console.log('Database is connected'))
-//   .catch((error) => console.error('Database connection error', error))
-
 connectDB();
 
 app.use(express.json());
