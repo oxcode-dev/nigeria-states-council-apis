@@ -7,6 +7,7 @@ import wardsRouter from "./routes/wardsRouter.js"
 import bodyParser from "body-parser";
 import cors from "cors"
 import { authRouter } from "./controllers/authController.js"
+import connectDB from "./config/db.js"
 
 config();
 
@@ -28,16 +29,18 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-mongoose
-  .connect(process.env.mongodb, {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      // useCreateIndex: true,
-      serverSelectionTimeoutMS: 30000,
-      socketTimeoutMS: 45000,
-  })
-  .then(() => console.log('Database is connected'))
-  .catch((error) => console.error('Database connection error', error))
+// mongoose
+//   .connect(process.env.mongodb, {
+//       // useNewUrlParser: true,
+//       // useUnifiedTopology: true,
+//       // useCreateIndex: true,
+//       serverSelectionTimeoutMS: 30000,
+//       socketTimeoutMS: 45000,
+//   })
+//   .then(() => console.log('Database is connected'))
+//   .catch((error) => console.error('Database connection error', error))
+
+connectDB();
 
 app.use(express.json());
 
