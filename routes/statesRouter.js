@@ -92,6 +92,7 @@ router.delete('/:id', async (request, response) => {
         return response.status(201).send({
             message: 'State successfully deleted!!!',
             deletedItem: result,
+            status: "success",
         });
     }
     catch (error) {
