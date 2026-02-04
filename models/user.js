@@ -17,7 +17,11 @@ const userSchema = mongoose.Schema({
     last_name: {
         type: String,
         required: true, 
-    }
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 export const User = mongoose.model('User', userSchema);
