@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const stateSchema = mongoose.Schema({
-    name: { type: String, required: true},
+    name: { type: String, required: true, unique: true},
     bio: { type: String, required: false},
     code: { type: String, required: true},
     slogan: { type: String, required: true},

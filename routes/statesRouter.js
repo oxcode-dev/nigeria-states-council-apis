@@ -43,7 +43,13 @@ router.post('/', async (request, response) => {
 
         const state = await State.create(newState);
 
-        return response.status(201).send(state);
+        let data = {
+            status: "success",
+            message: "State created successfully",
+            state,
+        }
+
+        return response.status(201).send(data);
     }
     catch (error) {
         console.log(error)
