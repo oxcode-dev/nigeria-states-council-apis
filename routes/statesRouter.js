@@ -21,6 +21,12 @@ router.get('/', async(req, res) => {
 router.post('/', async (request, response) => {
     try {
         const formData = request.body;
+        let existingState = await State.findOne({ name: formData.name });
+        if(existingState) {
+            return response.status(400).send({
+                message: "State already exists!",
+            })
+        }
         if(
             !formData.name || !formData.code || 
             !formData.geo_zone || !formData.capital_city
@@ -99,9 +105,10 @@ router.put('/:id', async (request, response) => {
         const { id } = request.params;
 
         const formData = request.body;
+
         if(
             !formData.name || !formData.code || 
-            !formData.zone || !formData.slogan
+            !formData.geo_zone || !formData.capital_city
         ) {
             return response.status(400).send({
                 message: "Required fields are missing!",
@@ -113,7 +120,10 @@ router.put('/:id', async (request, response) => {
             bio: formData.bio,
             code: formData.code,
             slogan: formData.slogan,
-            zone: formData.zone,
+            geo_zone: formData.geo_zone,
+            capital_city: formData.capital_city,
+            description: formData.description,
+            creation_year: formData.creation_year,
         }
 
         const result = await State.findByIdAndUpdate(id, updatedState, { new: true});
@@ -124,7 +134,13 @@ router.put('/:id', async (request, response) => {
             })
         }
 
-        return response.status(201).send(result);
+         let data = {
+            status: "success",
+            message: "State updated successfully",
+            state: result,
+        }
+
+        return response.status(201).send(data);
     }
     catch (error) {
         console.log(error)
