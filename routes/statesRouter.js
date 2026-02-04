@@ -23,7 +23,7 @@ router.post('/', async (request, response) => {
         const formData = request.body;
         if(
             !formData.name || !formData.code || 
-            !formData.zone || !formData.slogan
+            !formData.geo_zone || !formData.capital_city
         ) {
             return response.status(400).send({
                 message: "Required fields are missing!",
@@ -35,7 +35,10 @@ router.post('/', async (request, response) => {
             bio: formData.bio,
             code: formData.code,
             slogan: formData.slogan,
-            zone: formData.zone,
+            geo_zone: formData.geo_zone,
+            capital_city: formData.capital_city,
+            description: formData.description,
+            creation_year: formData.creation_year,
         }
 
         const state = await State.create(newState);
