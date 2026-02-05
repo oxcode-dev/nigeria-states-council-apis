@@ -1,12 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const localGovtSchema = mongoose.Schema({
-    name: { type: String, required: true},
-    bio: { type: String, required: false},
-    code: { type: String, required: true},
-    // code: { type: Number, required: true},
-    slogan: { type: String, required: true},
-    zone: { type: String, required: true},
+    name: { type: String, required: true, unique: true },
+    description: { type: String, required: false },
+    code: { type: String, required: true },
+    slogan: { type: String, required: false },
+    capital_town: { type: String, required: true },
+    creation_year: { type: Number, required: false },
+
+    state: { type: Schema.Types.ObjectId, ref: 'State', required: true },
+
     // category: { 
     //     type: String,
     //     required: true,

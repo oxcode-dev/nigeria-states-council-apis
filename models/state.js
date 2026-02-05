@@ -9,11 +9,6 @@ const stateSchema = mongoose.Schema({
     capital_city: { type: String, required: true},
     description: { type: String, required: false},
     creation_year: { type: Number, required: false},
-    // category: { 
-    //     type: String,
-    //     required: true,
-    //     enum: ["course", "template",]
-    // },
 })
 
 export const State = mongoose.model("State", stateSchema);
