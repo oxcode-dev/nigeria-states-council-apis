@@ -12,6 +12,6 @@ const WardsSchema = mongoose.Schema({
     //     required: true,
     //     enum: ["course", "template",]
     // },
-})
+}, {timestamps: true})
 
 export const Ward = mongoose.model("Ward", WardsSchema);

@@ -85,6 +85,7 @@ router.delete('/:id', async (request, response) => {
         return response.status(201).send({
             message: 'Local Government successfully deleted!!!',
             deletedItem: result,
+            status: "success",
         });
     }
     catch (error) {
