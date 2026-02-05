@@ -1,5 +1,6 @@
 import express from "express"
 import { State } from "../models/state.js";
+import { auth } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.post('/', async (request, response) => {
+router.post('/', auth, async (request, response) => {
     try {
         const formData = request.body;
         let existingState = await State.findOne({ name: formData.name });
@@ -77,7 +78,7 @@ router.get('/:id', async (request, response) => {
     }
 })
 
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', auth, async (request, response) => {
     try {
         const { id } = request.params;
 
@@ -101,7 +102,7 @@ router.delete('/:id', async (request, response) => {
     }
 })
 
-router.put('/:id', async (request, response) => {
+router.put('/:id', auth, async (request, response) => {
     try {
         const { id } = request.params;
 

@@ -7,7 +7,7 @@ const auth = async(req, res, next) => {
     const authHeader = req.headers['authorization'];
 
     if(!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ message: 'No token, authorization denied'})
+        return res.status(401).json({ message: 'Kindly login to access this resource' });
     }
 
     const token = authHeader.split(' ')[1];
