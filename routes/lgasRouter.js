@@ -22,7 +22,7 @@ router.post('/', async (request, response) => {
         const formData = request.body;
         if(
             !formData.name || !formData.code || 
-            !formData.zone || !formData.slogan
+            !formData.state_id || !formData.slogan
         ) {
             return response.status(400).send({
                 message: "Required fields are missing!",
@@ -34,12 +34,20 @@ router.post('/', async (request, response) => {
             bio: formData.bio,
             code: formData.code,
             slogan: formData.slogan,
-            zone: formData.zone,
+            state_id: formData.state_id,
+            capital_town: formData.capital_town,
+            state: formData.state_id,
         }
 
         const lga = await LocalGovt.create(newLga);
 
-        return response.status(201).send(lga);
+        let data = {
+            status: "success",
+            message: "Local Government created successfully",
+            lga,
+        }
+
+        return response.status(201).send(data);
     }
     catch (error) {
         console.log(error)
@@ -91,7 +99,7 @@ router.put('/:id', async (request, response) => {
         const formData = request.body;
         if(
             !formData.name || !formData.code || 
-            !formData.zone || !formData.slogan
+            !formData.state_id || !formData.slogan
         ) {
             return response.status(400).send({
                 message: "Required fields are missing!",
@@ -103,7 +111,7 @@ router.put('/:id', async (request, response) => {
             bio: formData.bio,
             code: formData.code,
             slogan: formData.slogan,
-            zone: formData.zone,
+            state_id: formData.state_id,
         }
 
         const result = await LocalGovt.findByIdAndUpdate(id, updatedLocalGovt, { new: true});

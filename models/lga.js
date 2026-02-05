@@ -6,6 +6,7 @@ const localGovtSchema = mongoose.Schema({
     code: { type: String, required: true },
     slogan: { type: String, required: false },
     capital_town: { type: String, required: true },
+    state_id: { type: String, required: true },
     creation_year: { type: Number, required: false },
 
     state: { type: Schema.Types.ObjectId, ref: 'State', required: true },
