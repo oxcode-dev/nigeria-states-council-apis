@@ -7,7 +7,7 @@ router.get('/', async(req, res) => {
 
     try {
 
-        const lgas = await LocalGovt.find();
+        const lgas = await LocalGovt.find().populate('state', 'name -_id');
 
         return res.status(201).send(lgas);
     }
@@ -31,12 +31,13 @@ router.post('/', async (request, response) => {
 
         const newLga = {
             name: formData.name,
-            bio: formData.bio,
             code: formData.code,
             slogan: formData.slogan,
             state_id: formData.state_id,
             capital_town: formData.capital_town,
             state: formData.state_id,
+            creation_year: formData.creation_year,
+            description: formData.description,
         }
 
         const lga = await LocalGovt.create(newLga);
@@ -108,10 +109,13 @@ router.put('/:id', async (request, response) => {
 
         const updatedLocalGovt = {
             name: formData.name,
-            bio: formData.bio,
             code: formData.code,
             slogan: formData.slogan,
             state_id: formData.state_id,
+            capital_town: formData.capital_town,
+            state: formData.state_id,
+            creation_year: formData.creation_year,
+            description: formData.description,
         }
 
         const result = await LocalGovt.findByIdAndUpdate(id, updatedLocalGovt, { new: true});
@@ -122,7 +126,13 @@ router.put('/:id', async (request, response) => {
             })
         }
 
-        return response.status(201).send(result);
+        let data = {
+            status: "success",
+            message: "Local Government updated successfully",
+            result,
+        }
+
+        return response.status(201).send(data);
     }
     catch (error) {
         console.log(error)
