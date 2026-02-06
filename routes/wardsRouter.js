@@ -4,11 +4,24 @@ import { Ward } from "../models/ward.js";
 const router = express.Router();
 
 router.get('/', async(req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skipIndex = (page - 1) * limit;
 
     try {
-        const wards = await Ward.find();
+        // Get total count for metadata
+    const totalCount = await Ward.countDocuments();
+        const wards = await Ward.find().skip(skipIndex).limit(limit).exec();
 
-        return res.status(201).send(wards);
+        return res.status(201).send({
+            wards,
+            metadata: {
+                page,
+                limit,
+                totalCount,
+                totalPages: Math.ceil(totalCount / limit),
+            }
+        });
     }
     catch (error) {
         console.log(error)
