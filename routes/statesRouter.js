@@ -5,13 +5,26 @@ import { auth } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 router.get('/', async(req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 1;
+    const skipIndex = (page - 1) * limit;
 
     try {
-        // return res.status(201).send('Hello World');
+            const states = await State.find()
+            .sort({ name: 1 })
+            .skip(skipIndex).limit(limit).exec();
 
-        const states = await State.find().sort({ name: 1 });
+        const totalCount = await State.countDocuments();
 
-        return res.status(201).send(states);
+        return res.status(201).send({
+            states,
+            metadata: {
+                page,
+                limit,
+                totalCount,
+                totalPages: Math.ceil(totalCount / limit),
+            }
+        });
     }
     catch (error) {
         console.log(error)

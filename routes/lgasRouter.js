@@ -48,6 +48,12 @@ router.get('/', async(req, res) => {
 router.post('/', async (request, response) => {
     try {
         const formData = request.body;
+        let existingLga = await LocalGovt.findOne({ name: formData.name });
+        if(existingLga) {
+            return response.status(400).send({
+                message: "Local Government already exists!",
+            })
+        }
         if(
             !formData.name || !formData.code || 
             !formData.state_id || !formData.slogan
