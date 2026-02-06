@@ -9,7 +9,7 @@ router.get('/', async(req, res) => {
     try {
         // return res.status(201).send('Hello World');
 
-        const states = await State.find();
+        const states = await State.find().sort({ name: 1 });
 
         return res.status(201).send(states);
     }

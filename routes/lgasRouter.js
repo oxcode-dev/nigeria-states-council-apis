@@ -5,14 +5,29 @@ const router = express.Router();
 
 router.get('/', async(req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 1;
     const skipIndex = (page - 1) * limit;
 
     try {
 
         const totalCount = await LocalGovt.countDocuments();
 
-        const lgas = await LocalGovt.find().populate('state', 'name -_id').skip(skipIndex).limit(limit).exec();
+        const lgas = await LocalGovt.find()
+            .populate('state', 'name -_id')
+            .sort({ name: 1 })
+            .skip(skipIndex).limit(limit).exec()
+            // .exec(function(err, lgas) {
+            //     if (err) return handleError(err);
+
+            //     // Manually sort the results in JavaScript after population
+            //     lgas.sort(function(a, b) {
+            //         if (a.state.name > b.state.name) return 1;
+            //         if (a.state.name < b.state.name) return -1;
+            //         return 0;
+            //     });
+
+            //     console.log(lgas);
+            // });
 
         return res.status(201).send({
             lgas,
