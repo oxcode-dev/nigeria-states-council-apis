@@ -10,7 +10,7 @@ router.get('/', async(req, res) => {
 
     try {
         // Get total count for metadata
-    const totalCount = await Ward.countDocuments();
+        const totalCount = await Ward.countDocuments();
         const wards = await Ward.find().skip(skipIndex).limit(limit).exec();
 
         return res.status(201).send({

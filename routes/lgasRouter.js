@@ -4,12 +4,25 @@ import { LocalGovt } from "../models/lga.js";
 const router = express.Router();
 
 router.get('/', async(req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skipIndex = (page - 1) * limit;
 
     try {
 
-        const lgas = await LocalGovt.find().populate('state', 'name -_id');
+        const totalCount = await LocalGovt.countDocuments();
 
-        return res.status(201).send(lgas);
+        const lgas = await LocalGovt.find().populate('state', 'name -_id').skip(skipIndex).limit(limit).exec();
+
+        return res.status(201).send({
+            lgas,
+            metadata: {
+                page,
+                limit,
+                totalCount,
+                totalPages: Math.ceil(totalCount / limit),
+            }
+        });
     }
     catch (error) {
         console.log(error)
