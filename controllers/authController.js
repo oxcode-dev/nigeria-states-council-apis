@@ -50,45 +50,52 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-
-        if(!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        }
-
         const isMatch = await bcrypt.compare(password, user.password)
 
-        if(isMatch) {
-            const payload = { 
-                id: user._id,
-                email: user.email,
-            }
-            jwt.sign(
-                payload,
-                process.env.JWT_SECRET,
-                { expiresIn: 3600},
-                (error, token) => {
-                    if(error) throw error;
-
-                    res.json({
-                        token,
-                        user: {
-                            id: user._id,
-                            email: user.email,
-                            first_name: user.first_name,
-                            last_name: user.last_name
-                        },
-                        message: 'Login successful'
-                    })
-                }
-            );
-        }
-        else {
+        if(!user || !isMatch) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
+
+        const payload = { 
+            id: user._id,
+            email: user.email,
+        }
+        jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            { expiresIn: 3600},
+            (error, token) => {
+                if(error) throw error;
+
+                res.json({
+                    token,
+                    user: {
+                        id: user._id,
+                        email: user.email,
+                        first_name: user.first_name,
+                        last_name: user.last_name
+                    },
+                    message: 'Login successful'
+                })
+            }
+        );
     } catch (error) {
         console.error(error)
         return res.status(500).json({ message: 'Server error' });
     }
 })
+
+router.delete('/logout', async (req, res) => {
+    try {
+        // Clearing JWT cookie
+        res.cookie("jwt", "", { maxAge: 0 });
+        // Sending success response
+        res.status(200).json({ message: "Logged out successfully" });
+    } catch (error) {
+        // Handling errors
+        console.log("Error in logout controller", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 export { router as authRouter };
