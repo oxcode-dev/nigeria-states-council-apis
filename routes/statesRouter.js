@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', async(req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 1;
+    const limit = parseInt(req.query.limit) || 10;
     const skipIndex = (page - 1) * limit;
 
     try {
