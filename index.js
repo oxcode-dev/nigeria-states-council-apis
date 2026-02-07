@@ -8,6 +8,7 @@ import bodyParser from "body-parser";
 import cors from "cors"
 import { authRouter } from "./controllers/authController.js"
 import connectDB from "./config/db.js"
+import { profileRouter } from "./controllers/profileController.js"
 
 config();
 
@@ -37,3 +38,4 @@ app.use('/api/states', statesRouter)
 app.use('/api/lgas', lgasRouter)
 app.use('/api/wards', wardsRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/profile', profileRouter)
