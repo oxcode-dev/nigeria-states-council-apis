@@ -1,5 +1,6 @@
 import express from "express"
 import { User } from "../models/user.js";
+import { generatePassword } from "../helpers/index.js";
 
 const router = express.Router();
 
@@ -38,8 +39,10 @@ router.post('/', async (request, response) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        // const hashedPassword = await bcrypt.hash(password, 12);
+        const password = generatePassword(8);
 
+        const hashedPassword = await bcrypt.hash(password, 12);
+    
         if(!first_name || !last_name || !email) {
             return res.status(400).json({
                 message: "Required fields are missing!",
@@ -50,6 +53,7 @@ router.post('/', async (request, response) => {
             first_name: first_name,
             last_name: last_name,
             email: email,
+            password: hashedPassword,
         }
 
         const user = await User.create(newUser).select('-password');
