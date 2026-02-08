@@ -90,7 +90,7 @@ router.delete('/logout', async (req, res) => {
         // Clearing JWT cookie
         res.cookie("jwt", "", { maxAge: 0 });
         // Sending success response
-        res.status(200).json({ message: "Logged out successfully" });
+        res.status(201).json({ message: "Logged out successfully" });
     } catch (error) {
         // Handling errors
         console.log("Error in logout controller", error.message);
