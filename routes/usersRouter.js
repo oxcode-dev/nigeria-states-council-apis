@@ -76,9 +76,15 @@ router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const ward = await Ward.findById(id);
+        const user = await User.findById(id);
 
-        return response.status(201).send(ward);
+        let data = {
+            status: "success",
+            message: "User fetched successfully",
+            user,
+        }
+
+        return response.status(201).send(data);
     }
     catch (error) {
         console.log(error)
@@ -90,16 +96,16 @@ router.delete('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const result = await Ward.findByIdAndDelete(id);
+        const result = await User.findByIdAndDelete(id);
 
         if(!result) {
             return response.status(404).send({
-                message: "Ward not found!",
+                message: "User not found!",
             })
         }
 
         return response.status(201).send({
-            message: 'Ward successfully deleted!!!',
+            message: 'User successfully deleted!!!',
             deletedItem: result,
         });
     }
@@ -114,28 +120,25 @@ router.put('/:id', async (request, response) => {
         const { id } = request.params;
 
         const formData = request.body;
-        if(
-            !formData.name || !formData.code || 
-            !formData.zone || !formData.slogan
-        ) {
-            return response.status(400).send({
+        const { first_name, last_name, email } = req.body;
+
+        if(!first_name || !last_name || !email) {
+            return res.status(400).json({
                 message: "Required fields are missing!",
             })
         }
 
-        const updatedWard = {
-            name: formData.name,
-            bio: formData.bio,
-            code: formData.code,
-            slogan: formData.slogan,
-            zone: formData.zone,
+        const updatedUser = {
+            first_name: formData.first_name,
+            last_name: formData.last_name,
+            email: formData.email,
         }
 
-        const result = await Ward.findByIdAndUpdate(id, updatedWard, { new: true});
+        const result = await User.findByIdAndUpdate(id, updatedUser, { new: true});
 
         if(!result) {
             return response.status(404).send({
-                message: "Ward not found!",
+                message: "User not found!",
             })
         }
 
