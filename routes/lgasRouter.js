@@ -55,10 +55,7 @@ router.post('/', auth, async (request, response) => {
                 message: "Local Government already exists!",
             })
         }
-        if(
-            !formData.name || !formData.code || 
-            !formData.state_id || !formData.slogan
-        ) {
+        if(!formData.name || !formData.code || !formData.state_id || !formData.slogan) {
             return response.status(400).send({
                 message: "Required fields are missing!",
             })
