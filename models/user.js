@@ -24,4 +24,9 @@ const userSchema = mongoose.Schema({
     },
 }, {timestamps: true});
 
+userSchema
+	.virtual("fullName")
+	.get(function () {
+		return this.firstName + " " + this.lastName;
+	});
 export const User = mongoose.model('User', userSchema);
