@@ -67,7 +67,7 @@ router.put('/', auth, async (req, res) => {
                 last_name: user.last_name,
             },
         };
-        res.status(200).json(data);
+        res.status(201).json(data);
     } catch(error) {
         return res.status(500).json({ message: 'server error'})
     }
