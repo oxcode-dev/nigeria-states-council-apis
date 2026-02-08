@@ -58,14 +58,38 @@ router.put('/', auth, async (req, res) => {
         let data = {
             status: "success",
             message: "Profile updated successfully",
-            user: {
-                id: user._id,
-                fullName: user.fullName,
-                email: user.email,
-                isAdmin: user.isAdmin,
-                first_name: user.first_name,
-                last_name: user.last_name,
-            },
+        };
+        res.status(201).json(data);
+    } catch(error) {
+        return res.status(500).json({ message: 'server error'})
+    }
+})
+
+router.post('/change-password', auth, async (req, res) => {
+    try {
+        const auth = req.user
+        const user = await User.findById(auth.id)
+
+        if(!user) {
+            return res.status(404).json({ message: 'User not found' })
+        }
+        
+        const { password, confirm_password } = req.body;
+
+        if(!password || !confirm_password) {
+            return res.status(400).json({ message: 'Password fields are required' })
+        }
+
+        if(password !== confirm_password) {
+            return res.status(400).json({ message: 'Passwords do not match' })
+        }
+
+        user.password = await bcrypt.hash(password, 12);
+        await user.save();
+
+        let data = {
+            status: "success",
+            message: "Password changed successfully",
         };
         res.status(201).json(data);
     } catch(error) {
