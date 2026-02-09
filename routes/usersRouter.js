@@ -3,10 +3,12 @@ import { User } from "../models/user.js";
 import { generatePassword } from "../helpers/index.js";
 import bcrypt from 'bcryptjs';
 import { sendMail } from "../helpers/mailer.js";
+import { adminMiddleware } from "../middlewares/adminMiddleware.js";
+import { auth } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.get('/', async(req, res) => {
+router.get('/', auth, adminMiddleware, async(req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skipIndex = (page - 1) * limit;
@@ -32,7 +34,7 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', auth, adminMiddleware, async (req, res) => {
     try {
         const { first_name, last_name, email, isAdmin } = req.body;
         const userExists = await User.findOne({ email });
@@ -85,7 +87,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (request, res) => {
+router.get('/:id', auth, adminMiddleware, async (request, res) => {
     try {
         const { id } = request.params;
 
@@ -105,7 +107,7 @@ router.get('/:id', async (request, res) => {
     }
 })
 
-router.delete('/:id', async (request, res) => {
+router.delete('/:id', auth, adminMiddleware, async (request, res) => {
     try {
         const { id } = request.params;
 
