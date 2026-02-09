@@ -2,6 +2,7 @@ import express from "express"
 import { User } from "../models/user.js";
 import { generatePassword } from "../helpers/index.js";
 import bcrypt from 'bcryptjs';
+import { sendMail } from "../helpers/mailer.js";
 
 const router = express.Router();
 
@@ -40,7 +41,8 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        const password = generatePassword(8);
+        // const password = generatePassword(8);
+        const password = "password";
 
         const hashedPassword = await bcrypt.hash(password, 12);
     
@@ -67,6 +69,13 @@ router.post('/', async (req, res) => {
             message: "User created successfully",
             user: userWithoutPassword,
         }
+
+        // await sendMail(
+        //     process.env.EMAIL_SMTP_USERNAME,
+        //     // email,
+        //     "Your Account Password",
+        //     `<p>Your account has been created. Your password is: <b>${password}</b></p>`
+        // );
 
         return res.status(201).send(data);
     }
@@ -107,6 +116,13 @@ router.delete('/:id', async (request, res) => {
                 message: "User not found!",
             })
         }
+
+        // await sendMail(
+        //     process.env.EMAIL_SMTP_USERNAME,
+        //     result.email,
+        //     "Account Deletion Notification",
+        //     `<p>Your account with email ${result.email} has been deleted.</p>`
+        // );
 
         return res.status(201).send({
             message: 'User successfully deleted!!!',

@@ -11,17 +11,9 @@ let transporter = nodemailer.createTransport({
 		pass: process.env.EMAIL_SMTP_PASSWORD
 	}
 });
-// const mailOptions = {
-//     from: "your.email@gmail.com",    // Sender address (Gmail overwrites this with the authenticated user)
-//     to: "recipient.email@example.com", // List of receivers, separated by commas
-//     subject: "Sending Email using Node.js", // Subject line
-//     text: "Hello world?",             // plain text body
-//     html: "<b>Hello world?</b>",      // html body
-// };
 
 
-const sendMail = function (from, to, subject, html)
-{
+const sendMail =  (from, to, subject, html) => {
 	// send mail with defined transport object
 	// visit https://nodemailer.com/ for more options
 	return transporter.sendMail({
