@@ -41,8 +41,7 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        // const password = generatePassword(8);
-        const password = "password";
+        const password = generatePassword(8);
 
         const hashedPassword = await bcrypt.hash(password, 12);
     
@@ -70,12 +69,13 @@ router.post('/', async (req, res) => {
             user: userWithoutPassword,
         }
 
-        // await sendMail(
-        //     process.env.EMAIL_SMTP_USERNAME,
-        //     // email,
-        //     "Your Account Password",
-        //     `<p>Your account has been created. Your password is: <b>${password}</b></p>`
-        // );
+        await sendMail(
+            process.env.EMAIL_SMTP_USERNAME,
+            // 'mrexcelsam1@gmail.com',
+            email,
+            "Your Account Password",
+            `<p>Your account has been created. Your password is: <b>${password}</b></p>`
+        );
 
         return res.status(201).send(data);
     }
@@ -117,12 +117,13 @@ router.delete('/:id', async (request, res) => {
             })
         }
 
-        // await sendMail(
-        //     process.env.EMAIL_SMTP_USERNAME,
-        //     result.email,
-        //     "Account Deletion Notification",
-        //     `<p>Your account with email ${result.email} has been deleted.</p>`
-        // );
+        await sendMail(
+            process.env.EMAIL_SMTP_USERNAME,
+            result.email,
+            // 'mrexcelsam1@gmail.com',
+            "Account Deletion Notification",
+            `<p>Your account with email ${result.email} has been deleted.</p>`
+        );
 
         return res.status(201).send({
             message: 'User successfully deleted!!!',
