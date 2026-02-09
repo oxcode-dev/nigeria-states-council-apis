@@ -7,3 +7,16 @@ export function generatePassword(length) {
     }
     return password;
 }
+
+function generatePin($digits = 4) {
+    let i = 0; //counter
+    let pin = ''; //our default pin is blank.
+
+    while (i < $digits) {
+        //generate a random number between 0 and 9.
+        pin += random_int(0, 9);
+        i++;
+    }
+
+    return pin;
+}
