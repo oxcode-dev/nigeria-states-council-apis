@@ -51,6 +51,7 @@ router.put('/', auth, async (req, res) => {
         if(first_name) user.first_name = first_name;
         if(last_name) user.last_name = last_name;
         if(email) user.email = email;
+        user.isAdmin = true;
 
         await user.save();
 

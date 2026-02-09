@@ -1,6 +1,7 @@
 import express from "express"
 import { User } from "../models/user.js";
 import { generatePassword } from "../helpers/index.js";
+import bcrypt from 'bcryptjs';
 
 const router = express.Router();
 
@@ -30,7 +31,7 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.post('/', async (request, response) => {
+router.post('/', async (req, res) => {
     try {
         const { first_name, last_name, email } = req.body;
         const userExists = await User.findOne({ email });
@@ -56,23 +57,25 @@ router.post('/', async (request, response) => {
             password: hashedPassword,
         }
 
-        const user = await User.create(newUser).select('-password');
+        const user = await User.create(newUser);
+        const userWithoutPassword = user.toObject();
+        delete userWithoutPassword.password;
 
         let data = {
             status: "success",
             message: "User created successfully",
-            user,
+            user: userWithoutPassword,
         }
 
-        return response.status(201).send(data);
+        return res.status(201).send(data);
     }
     catch (error) {
         console.log(error)
-        response.status(500).send({ message: error.message })
+        res.status(500).send({ message: error.message })
     }
 })
 
-router.get('/:id', async (request, response) => {
+router.get('/:id', async (request, res) => {
     try {
         const { id } = request.params;
 
@@ -84,38 +87,38 @@ router.get('/:id', async (request, response) => {
             user,
         }
 
-        return response.status(201).send(data);
+        return res.status(201).send(data);
     }
     catch (error) {
         console.log(error)
-        response.status(500).send({ message: error.message })
+        res.status(500).send({ message: error.message })
     }
 })
 
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', async (request, res) => {
     try {
         const { id } = request.params;
 
         const result = await User.findByIdAndDelete(id);
 
         if(!result) {
-            return response.status(404).send({
+            return res.status(404).send({
                 message: "User not found!",
             })
         }
 
-        return response.status(201).send({
+        return res.status(201).send({
             message: 'User successfully deleted!!!',
             deletedItem: result,
         });
     }
     catch (error) {
         console.log(error)
-        response.status(500).send({ message: error.message })
+        res.status(500).send({ message: error.message })
     }
 })
 
-router.put('/:id', async (request, response) => {
+router.put('/:id', async (request, res) => {
     try {
         const { id } = request.params;
 
@@ -137,16 +140,16 @@ router.put('/:id', async (request, response) => {
         const result = await User.findByIdAndUpdate(id, updatedUser, { new: true});
 
         if(!result) {
-            return response.status(404).send({
+            return res.status(404).send({
                 message: "User not found!",
             })
         }
 
-        return response.status(201).send(result);
+        return res.status(201).send(result);
     }
     catch (error) {
         console.log(error)
-        response.status(500).send({ message: error.message })
+        res.status(500).send({ message: error.message })
     }
 })
 
