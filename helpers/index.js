@@ -8,7 +8,7 @@ export function generatePassword(length) {
     return password;
 }
 
-function generatePin($digits = 4) {
+export function generatePin($digits = 4) {
     let i = 0; //counter
     let pin = ''; //our default pin is blank.
 
