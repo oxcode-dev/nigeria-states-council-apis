@@ -4,7 +4,7 @@ import { auth } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.get('/', auth, async(req, res) => {
+router.get('/', async(req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 50;
     const skipIndex = (page - 1) * limit;
