@@ -12,23 +12,15 @@ router.get('/', async(req, res) => {
     try {
 
         const totalCount = await LocalGovt.countDocuments();
-
+            
         const lgas = await LocalGovt.find()
-            .populate('state', 'name -_id')
-            .sort({ name: 1 })
-            .skip(skipIndex).limit(limit).exec()
-            // .exec(function(err, lgas) {
-            //     if (err) return handleError(err);
-
-            //     // Manually sort the results in JavaScript after population
-            //     lgas.sort(function(a, b) {
-            //         if (a.state.name > b.state.name) return 1;
-            //         if (a.state.name < b.state.name) return -1;
-            //         return 0;
-            //     });
-
-            //     console.log(lgas);
-            // });
+            .populate({
+                path: 'state',
+                select: 'name'
+            })
+            .sort({ name: 'asc' })
+            // .sort({ 'state.name': 'asc' })
+            .skip(skipIndex).limit(limit).exec();
 
         return res.status(201).send({
             lgas,
