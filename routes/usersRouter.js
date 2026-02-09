@@ -33,7 +33,7 @@ router.get('/', async(req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const { first_name, last_name, email } = req.body;
+        const { first_name, last_name, email, isAdmin } = req.body;
         const userExists = await User.findOne({ email });
         
         if(userExists) {
@@ -55,6 +55,7 @@ router.post('/', async (req, res) => {
             last_name: last_name,
             email: email,
             password: hashedPassword,
+            isAdmin: isAdmin || false,
         }
 
         const user = await User.create(newUser);
@@ -110,6 +111,7 @@ router.delete('/:id', async (request, res) => {
         return res.status(201).send({
             message: 'User successfully deleted!!!',
             deletedItem: result,
+            status: "success",
         });
     }
     catch (error) {
