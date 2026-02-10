@@ -3,6 +3,7 @@ import { User } from '../models/user.js';
 import { generatePin } from '../helpers/index.js';
 import { OtpCode } from '../models/otpCode.js';
 import { sendMail } from '../helpers/mailer.js';
+import bcrypt from 'bcryptjs';
 
 const router = express.Router();
 
