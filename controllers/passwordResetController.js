@@ -6,7 +6,7 @@ import { sendMail } from '../helpers/mailer.js';
 
 const router = express.Router();
 
-// Router for user login
+// Router for forgot password
 router.post('/forgot', async (req, res) => {
     try {
         const { email } = req.body;
@@ -15,6 +15,8 @@ router.post('/forgot', async (req, res) => {
         if(!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
+
+        await OtpCode.deleteMany({ email: user.email });
 
         const newOtpCodeDetails = {
             code: generatePin(4),
@@ -37,6 +39,47 @@ router.post('/forgot', async (req, res) => {
          let data = {
             status: "success",
             message: "Password reset OTP sent successfully! Please check your email.",
+        }
+
+        return res.status(201).send(data);
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({ message: 'Server error' });
+    }
+})
+
+router.post('/reset', async (req, res) => {
+    try {
+        const { email, otp, new_password } = req.body;
+        const user = await User.findOne({ email });
+
+        if(!user) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
+
+        if(!otp || !new_password || !email) {
+            return res.status(400).json({ message: "Required fields are missing!" });
+        }
+
+        const otpCode = await OtpCode.findOne({ email, code: otp });
+
+        if(!otpCode) {
+            return res.status(400).json({ message: "Invalid OTP" });
+        }
+
+        if(otpCode.expires_at < new Date()) {
+            return res.status(400).json({ message: "OTP has expired" });
+        }
+        
+        const hashedPassword = await bcrypt.hash(new_password, 12);
+        user.password = hashedPassword;
+        await user.save();
+
+        await OtpCode.deleteMany({ email: user.email });
+
+        let data = {
+            status: "success",
+            message: "Password reset successfully! Please login with your new password.",
         }
 
         return res.status(201).send(data);
