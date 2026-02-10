@@ -1,9 +1,8 @@
 import express from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { User } from '../models/user.js';
 import { generatePin } from '../helpers/index.js';
 import { OtpCode } from '../models/otpCode.js';
+import { sendMail } from '../helpers/mailer.js';
 
 const router = express.Router();
 

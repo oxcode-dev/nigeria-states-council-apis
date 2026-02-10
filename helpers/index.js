@@ -14,7 +14,7 @@ export function generatePin($digits = 4) {
 
     while (i < $digits) {
         //generate a random number between 0 and 9.
-        pin += random_int(0, 9);
+        pin += Math.floor(Math.random() * 10);
         i++;
     }
 
