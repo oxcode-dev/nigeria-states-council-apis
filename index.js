@@ -17,7 +17,15 @@ config();
 const app = express();
 const port = 3000;
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); 
 
 // Middleware to parse JSON data
 app.use(bodyParser.json());
