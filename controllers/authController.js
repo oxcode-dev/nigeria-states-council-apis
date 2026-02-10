@@ -68,7 +68,7 @@ router.post('/login', async (req, res) => {
             (error, token) => {
                 if(error) throw error;
 
-                res.json({
+                res.status(201).json({
                     token,
                     user: {
                         id: user._id,
