@@ -27,19 +27,24 @@ router.post('/forgot', async (req, res) => {
 
         await sendMail(
             process.env.EMAIL_SMTP_USERNAME,
-            user.email,
-            // 'mrexcelsam1@gmail.com',
+            // user.email,
+            'mrexcelsam1@gmail.com',
             "Password Reset OTP",
             `<p>Your account with email ${user.email} has been requested for password reset.</p>
             <p>Your OTP is: <b>${otpCode.code}</b></p>
             <p>Thank you for using our application!</p>`
         );
-        
-        
+
+         let data = {
+            status: "success",
+            message: "Password reset OTP sent successfully! Please check your email.",
+        }
+
+        return res.status(201).send(data);
     } catch (error) {
         console.error(error)
         return res.status(500).json({ message: 'Server error' });
     }
 })
 
-export { router as authRouter };
+export { router as passwordResetRouter };

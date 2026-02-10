@@ -10,6 +10,7 @@ import cors from "cors"
 import { authRouter } from "./controllers/authController.js"
 import connectDB from "./config/db.js"
 import { profileRouter } from "./controllers/profileController.js"
+import { passwordResetRouter } from "./controllers/passwordResetController.js"
 
 config();
 
@@ -41,3 +42,4 @@ app.use('/api/wards', wardsRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/profile', profileRouter)
 app.use('/api/users', usersRouter)
+app.use('/api/password', passwordResetRouter)
