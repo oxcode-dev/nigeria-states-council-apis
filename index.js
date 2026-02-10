@@ -21,7 +21,7 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'], 
   credentials: true,
-  origin: [process.env.CLIENT_URL || 'http://localhost:3000', 'http://localhost:5173'],
+  origin: [process.env.CLIENT_URL || 'http://localhost:3000', 'http://localhost:5173', 'https://nigerian-states-councils-admin.vercel.app/'],
 };
 
 app.use(cors(corsOptions));
