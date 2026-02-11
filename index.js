@@ -5,6 +5,7 @@ import statesRouter from "./routes/statesRouter.js"
 import lgasRouter from "./routes/lgasRouter.js"
 import wardsRouter from "./routes/wardsRouter.js"
 import usersRouter from "./routes/usersRouter.js"
+import publicRouter from "./routes/publicRouter.js"
 import bodyParser from "body-parser";
 import cors from "cors"
 import { authRouter } from "./controllers/authController.js"
@@ -51,3 +52,4 @@ app.use('/api/auth', authRouter)
 app.use('/api/profile', profileRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/password', passwordResetRouter)
+app.use('/api/public', publicRouter)
