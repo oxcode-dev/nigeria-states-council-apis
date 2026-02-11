@@ -1,5 +1,4 @@
 import express from "express"
-import mongoose from "mongoose"
 import { config } from "dotenv"
 import statesRouter from "./routes/statesRouter.js"
 import lgasRouter from "./routes/lgasRouter.js"
@@ -12,6 +11,7 @@ import { authRouter } from "./controllers/authController.js"
 import connectDB from "./config/db.js"
 import { profileRouter } from "./controllers/profileController.js"
 import { passwordResetRouter } from "./controllers/passwordResetController.js"
+import rateLimit from "express-rate-limit"
 
 config();
 
@@ -32,6 +32,15 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  message: "Too many requests from this IP, please try again after 15 minutes",
+});
+
+// Apply the rate limiter to all requests
+app.use(limiter);
 
 app.get('/', (req, res) => {
   res.send('Hello World from Express!', req);
