@@ -12,7 +12,7 @@ router.get('/states/', async(req, res) => {
         const totalCount = await State.countDocuments();
 
         return res.status(201).send({
-            states,
+            data: states,
             metadata: {
                 totalCount,
             }
@@ -44,7 +44,7 @@ router.get('/lgas/', async(req, res) => {
         const totalCount = await LocalGovt.countDocuments();
 
         return res.status(201).send({
-            lgas,
+            data: lgas,
             metadata: {
                 totalCount,
             }
