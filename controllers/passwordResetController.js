@@ -34,7 +34,8 @@ router.post('/forgot', async (req, res) => {
             "Password Reset OTP",
             `<p>Your account with email ${user.email} has been requested for password reset.</p>
             <p>Your OTP is: <b>${otpCode.code}</b></p>
-            <p>Thank you for using our application!</p>`
+            <p>Thank you for using our application!</p>
+            <p><a href="${process.env.CLIENT_URL}/reset-password">Click here to reset your password</a></p>`
         );
 
          let data = {
