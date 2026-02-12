@@ -76,7 +76,8 @@ router.post('/', auth, adminMiddleware, async (req, res) => {
             // 'mrexcelsam1@gmail.com',
             email,
             "Your Account Password",
-            `<p>Your account has been created. Your password is: <b>${password}</b></p>`
+            `<p>Your account has been created. Your password is: <b>${password}</b></p>
+            <p><a href="${process.env.CLIENT_URL}/login">Click here to login to your account</a></p>`
         );
 
         return res.status(201).send(data);
