@@ -72,7 +72,7 @@ fetch("https://nigeria-states-council-apis.vercel.app/api/states/{id}").then(res
 - ✅ Forms (state/LGA dropdowns)
 - ✅ Data (Address) validation for forms
 - ✅ Location-based services in Nigeria
-- ✅ Government, fintech, health, and education apps
+- ✅ Government, fintech, health, education, & NGO apps
 
 ---
 
