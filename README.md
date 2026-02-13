@@ -88,7 +88,7 @@ fetch("https://nigeria-states-council-apis.vercel.app/api/states/{id}").then(res
 
 ---
 
-🧱 Tech Stack
+## 🧱 Tech Stack
 
 - ✅ Node.js
 - ✅ Express.js
