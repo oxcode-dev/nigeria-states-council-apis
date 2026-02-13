@@ -1,7 +1,7 @@
 # 🇳🇬 Nigeria States and Local Government API built with NodeJS, ExpressJS and MongoDB
 
-A comprehensive, structured, and ready-to-use api urls of all **States**, and **Local Government Areas (LGAs)** in Nigeria.
- <!-- including their **geographic coordinates**. -->
+A simple and fast REST API providing all **Nigeria states, the Federal Capital Territory (FCT), and Local Government Areas (LGAs)**.  
+Built with scalability, developer experience, and real-world usage in mind.
 
 Ideal for developers, civic tech, GIS, mapping tools, and data-driven apps.
 
@@ -69,10 +69,22 @@ fetch("https://nigeria-states-council-apis.vercel.app/api/states/{id}").then(res
 ## 📌 Use Cases
 
 - ✅ Election & civic apps
-- ✅ State/LGA dropdowns
-- ✅ Offline mapping and analytics
-- ✅ Data validation for forms
+- ✅ Forms (state/LGA dropdowns)
+- ✅ Data (Address) validation for forms
 - ✅ Location-based services in Nigeria
+- ✅ Government, fintech, health, and education apps
+
+---
+
+🚀 Features
+
+- ✅ List all Nigerian states and some details about them
+- ✅ List all Nigerian Local Governments and some details about them
+- ✅ Get LGAs by state
+- ✅ Includes FCT (Abuja)
+- ✅ Lightweight & fast
+- ✅ JSON responses
+- ✅ Easy to integrate
 
 ---
 
