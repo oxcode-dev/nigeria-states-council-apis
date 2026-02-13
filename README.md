@@ -23,7 +23,6 @@ Ideal for developers, civic tech, GIS, mapping tools, and data-driven apps.
 
 ### `states.json`
 ```json
-["Abia", "Adamawa", "Akwa Ibom", ..., "Zamfara"]
 {
     "data": [
         {
@@ -56,12 +55,7 @@ Ideal for developers, civic tech, GIS, mapping tools, and data-driven apps.
 
 ## 🚀 How to Use
 
-Host the files on:
-- GitHub Pages
-- Netlify / Vercel
-- Local or cloud-based APIs
-
-Then fetch like:
+fetch like:
 ```js
 fetch("/data/full.json").then(res => res.json());
 ```
@@ -71,7 +65,7 @@ fetch("/data/full.json").then(res => res.json());
 ## 📌 Use Cases
 
 - ✅ Election & civic apps
-- ✅ State/LGA/Ward dropdowns
+- ✅ State/LGA dropdowns
 - ✅ Offline mapping and analytics
 - ✅ Data validation for forms
 - ✅ Location-based services in Nigeria
