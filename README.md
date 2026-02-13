@@ -30,7 +30,7 @@ Ideal for developers, civic tech, GIS, mapping tools, and data-driven apps.
             "_id": "697d57d86bb5383b07fca60d",
             "name": "Abia",
             "code": "AB",
-            "slogan": "",
+            "slogan": "God's Own State",
             "__v": 0,
             "capital_city": "Umuahia",
             "creation_year": 1991,
