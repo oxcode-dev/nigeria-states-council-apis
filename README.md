@@ -55,9 +55,13 @@ Ideal for developers, civic tech, GIS, mapping tools, and data-driven apps.
 
 ## 🚀 How to Use
 
-fetch like:
+to fetch states:
 ```js
-fetch("/data/full.json").then(res => res.json());
+fetch("https://nigeria-states-council-apis.vercel.app/api/states").then(res => res.json());
+```
+to fetch single state:
+```js
+fetch("https://nigeria-states-council-apis.vercel.app/api/states/{id}").then(res => res.json());
 ```
 
 ---
