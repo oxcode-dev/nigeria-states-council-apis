@@ -24,6 +24,24 @@ Ideal for developers, civic tech, GIS, mapping tools, and data-driven apps.
 ### `states.json`
 ```json
 ["Abia", "Adamawa", "Akwa Ibom", ..., "Zamfara"]
+{
+    "data": [
+        {
+            "_id": "697d57d86bb5383b07fca60d",
+            "name": "Abia",
+            "code": "AB",
+            "slogan": "",
+            "__v": 0,
+            "capital_city": "Umuahia",
+            "creation_year": 1991,
+            "description": "Nulla harum beatae n",
+            "geo_zone": "South East"
+        },
+    ...],
+    "metadata": {
+        "totalCount": 4
+    }
+}
 ```
 
 ### `lgas.json`
