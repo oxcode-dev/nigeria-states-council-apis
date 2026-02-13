@@ -19,7 +19,7 @@ Ideal for developers, civic tech, GIS, mapping tools, and data-driven apps.
 
 ---
 
-## 🔎 File Structure Examples
+## 🔎 JSON Response Structure Examples
 
 ### `states.json`
 ```json
@@ -76,7 +76,7 @@ fetch("https://nigeria-states-council-apis.vercel.app/api/states/{id}").then(res
 
 ---
 
-🚀 Features
+## 🚀 Features
 
 - ✅ List all Nigerian states and some details about them
 - ✅ List all Nigerian Local Governments and some details about them
@@ -85,6 +85,15 @@ fetch("https://nigeria-states-council-apis.vercel.app/api/states/{id}").then(res
 - ✅ Lightweight & fast
 - ✅ JSON responses
 - ✅ Easy to integrate
+
+---
+
+🧱 Tech Stack
+
+- ✅ Node.js
+- ✅ Express.js
+- ✅ MongoDB
+- ✅ REST architecture
 
 ---
 
