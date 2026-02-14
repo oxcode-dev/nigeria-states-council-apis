@@ -14,11 +14,10 @@ router.get('/', async(req, res) => {
         const totalCount = await LocalGovt.countDocuments();
             
         const lgas = await LocalGovt.find()
-            // .populate({
-            //     path: 'state',
-            //     select: 'name'
-            // })
-            .populate('state')
+            .populate({
+                path: 'state',
+                select: 'name'
+            })
             .sort({ name: 'asc' })
             // .sort({ 'state.name': 'asc' })
             .skip(skipIndex).limit(limit).exec();
