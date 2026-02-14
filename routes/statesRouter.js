@@ -11,7 +11,10 @@ router.get('/', async(req, res) => {
 
     try {
             const states = await State.find()
-            .populate('lgas')
+            .populate({
+                path: 'lgas',
+                select: ['name', '_id']
+            })
             .sort({ name: 1 })
             .skip(skipIndex).limit(limit).exec();
 

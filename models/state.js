@@ -10,7 +10,17 @@ const stateSchema = mongoose.Schema({
     description: { type: String, required: false},
     creation_year: { type: Number, required: false},
 
-    lgas: [{ type: Schema.Types.ObjectId, ref: 'local_govts' }]
+    // lgas: [{ type: Schema.Types.ObjectId, ref: 'local_govts' }]
 })
+
+stateSchema.virtual('lgas', {
+   ref: 'local_govts',
+   localField: '_id', 
+   foreignField: 'state_id',
+});
+
+// Set Object and Json property to true. Default is set to false
+stateSchema.set('toObject', { virtuals: true });
+stateSchema.set('toJSON', { virtuals: true });
 
 export const State = mongoose.model("State", stateSchema);
