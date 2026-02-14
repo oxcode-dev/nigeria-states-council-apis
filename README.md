@@ -3,20 +3,6 @@
 A simple and fast REST API providing all **Nigeria states, the Federal Capital Territory (FCT), and Local Government Areas (LGAs)**.  
 Built with scalability, developer experience, and real-world usage in mind.
 
-Ideal for developers, civic tech, GIS, mapping tools, and data-driven apps.
-
----
-
-<!-- ## 📁 Folder: `data/` -->
-
-| URLs | Description |
-|------|-------------|
-| `api/public/states` | List of all Nigerian states (36 + FCT) |
-| `api/public/lgas` | List of all Nigerian LGAs (768 + 6 in FCT)  |
-<!-- | `wards.json` | Flat list of all wards with their lat/long | -->
-<!-- | `lgas-with-wards.json` | Nested object: state → LGA → wards | -->
-<!-- | `full.json` | 🔥 All-in-one structure: state → LGA → wards with coordinates | -->
-
 ---
 
 ## 🔎 JSON Response Structure Examples
