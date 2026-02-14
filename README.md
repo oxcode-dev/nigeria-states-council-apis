@@ -7,7 +7,7 @@ Built with scalability, developer experience, and real-world usage in mind.
 
 ## 🚀 How to Use
 
-# Get All States
+### Get All States
 
 GET ```/api/states```
 
@@ -32,7 +32,7 @@ GET ```/api/states```
 }
 ```
 
-# Get State By ID
+### Get State By ID
 
 GET ```/api/states/{id}```
 
@@ -50,7 +50,7 @@ GET ```/api/states/{id}```
 }
 ```
 
-# Get All States With LGAs
+### Get All States With LGAs
 
 GET ```/api/states-with-lgas```
 
@@ -90,7 +90,7 @@ GET ```/api/states-with-lgas```
     }
 }
 ```
-# Get Local Government by state
+### Get Local Government by state
 
 GET ```/api/states/:state/lgas```
 
