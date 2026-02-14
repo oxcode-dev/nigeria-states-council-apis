@@ -27,7 +27,11 @@ router.get('/states/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const state = await State.findById(id);
+        const state = await State.findById(id)
+            .populate({
+                path: 'lgas',
+                select: ['name', '_id']
+            }).exec();
 
         return response.status(201).send(state);
     }
