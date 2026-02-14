@@ -33,7 +33,7 @@ GET ```/api/states```
 ```
 
 
-# 1️⃣ Get State By ID
+# 2️⃣ Get State By ID
 
 GET ```/api/states/{id}```
 
