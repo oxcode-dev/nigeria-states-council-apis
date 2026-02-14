@@ -11,10 +11,6 @@ router.get('/', async(req, res) => {
 
     try {
             const states = await State.find()
-            .populate({
-                path: 'lgas',
-                select: ['name', '_id']
-            })
             .sort({ name: 1 })
             .skip(skipIndex).limit(limit).exec();
 
@@ -85,12 +81,15 @@ router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const state = await State.findById(id);
+        const state = await State.findById(id).populate({
+            path: 'lgas',
+            select: ['name', '_id']
+        }).exec();
 
         return response.status(201).send(state);
     }
     catch (error) {
-        console.log(error)
+        // console.log(error)
         response.status(500).send({ message: error.message })
     }
 })
