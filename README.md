@@ -5,47 +5,14 @@ Built with scalability, developer experience, and real-world usage in mind.
 
 ---
 
-## 🔎 JSON Response Structure Examples
-
-### `states.json`
-```json
-{
-    "data": [
-        {
-            "_id": "697d57d86bb5383b07fca60d",
-            "name": "Abia",
-            "code": "AB",
-            "slogan": "God's Own State",
-            "__v": 0,
-            "capital_city": "Umuahia",
-            "creation_year": 1991,
-            "description": "Nulla harum beatae n",
-            "geo_zone": "South East"
-        },
-    ...],
-    "metadata": {
-        "totalCount": 4
-    }
-}
-```
-
-### `lgas.json`
-```json
-{
-  "Kwara": ["Ilorin East", "Ilorin South", "Ilorin West", ...],
-  ...
-}
-```
-
----
-
 ## 🚀 How to Use
 
 to fetch states:
 ```js
 fetch("https://nigeria-states-council-apis.vercel.app/api/states").then(res => res.json());
 ```
-```api response
+
+``` api response
 {
     "data": [
         {
