@@ -63,6 +63,28 @@ router.get('/states/:name/lgas', async (request, response) => {
     }
 })
 
+router.get('/states-with-lgas', async(req, res) => {
+
+    try {
+        const states = await State.find().populate({
+            path: 'lgas',
+            // select: ['name', '_id']
+        }).exec();
+
+        const totalCount = await State.countDocuments();
+
+        return res.status(201).send({
+            data: states,
+            metadata: {
+                totalCount,
+            }
+        });
+    }
+    catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+})
+
 router.get('/lgas/', async(req, res) => {
 
     try {
