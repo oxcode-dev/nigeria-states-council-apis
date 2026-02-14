@@ -32,7 +32,6 @@ GET ```/api/states```
 }
 ```
 
-
 # Get State By ID
 
 GET ```/api/states/{id}```
