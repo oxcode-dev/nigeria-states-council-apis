@@ -50,6 +50,46 @@ GET ```/api/states/{id}```
 }
 ```
 
+# Get All States With LGAs
+
+GET ```/api/states-with-lgas```
+
+``` Response
+{
+    "data": [
+        {
+            "_id": "697d57d86bb5383b07fca60d",
+            "name": "Abia",
+            "code": "AB",
+            "slogan": "God's Own State",
+            "__v": 0,
+            "capital_city": "Umuahia",
+            "creation_year": 1991,
+            "description": "Nulla harum beatae n",
+            "geo_zone": "South East"
+            "lgas": [
+                {
+                    "_id": "6985f4251d00bd7a3fa15bfc",
+                    "name": "Marcia Perkins",
+                    "description": "Placeat pariatur N",
+                    "code": "Ut exercitation quas",
+                    "slogan": "Necessitatibus volup",
+                    "capital_town": "Quos provident ut e",
+                    "state_id": "698378bf23b225abd6efa970",
+                    "creation_year": 2007,
+                    "state": "698378bf23b225abd6efa970",
+                    "__v": 0
+                },
+                ...
+            ]
+        },
+        ...
+    ],
+    "metadata": {
+        "totalCount": 4
+    }
+}
+```
 # Get Local Government by state
 
 GET ```/api/states/:state/lgas```
