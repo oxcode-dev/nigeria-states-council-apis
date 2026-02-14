@@ -10,7 +10,7 @@ const stateSchema = mongoose.Schema({
     description: { type: String, required: false},
     creation_year: { type: Number, required: false},
 
-    lgas: [{ type: Schema.Types.ObjectId, ref: 'LocalGovt' }]
+    lgas: [{ type: Schema.Types.ObjectId, ref: 'local_govts' }]
 })
 
 export const State = mongoose.model("State", stateSchema);

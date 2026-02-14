@@ -10,12 +10,6 @@ const localGovtSchema = mongoose.Schema({
     creation_year: { type: Number, required: false },
 
     state: { type: Schema.Types.ObjectId, ref: 'State', required: true },
-
-    // category: { 
-    //     type: String,
-    //     required: true,
-    //     enum: ["course", "template",]
-    // },
 })
 
 export const LocalGovt = mongoose.model("local_govts", localGovtSchema);
