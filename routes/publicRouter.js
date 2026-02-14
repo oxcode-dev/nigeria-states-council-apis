@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/states/', async(req, res) => {
 
     try {
-        const states = await State.find().exec();
+        const states = await State.find().populate('lgas').exec();
 
         const totalCount = await State.countDocuments();
 

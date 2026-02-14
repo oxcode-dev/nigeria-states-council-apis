@@ -14,10 +14,11 @@ router.get('/', async(req, res) => {
         const totalCount = await LocalGovt.countDocuments();
             
         const lgas = await LocalGovt.find()
-            .populate({
-                path: 'state',
-                select: 'name'
-            })
+            // .populate({
+            //     path: 'state',
+            //     select: 'name'
+            // })
+            .populate('state')
             .sort({ name: 'asc' })
             // .sort({ 'state.name': 'asc' })
             .skip(skipIndex).limit(limit).exec();
@@ -84,7 +85,7 @@ router.get('/:id', auth, async (request, response) => {
     try {
         const { id } = request.params;
 
-        const lga = await LocalGovt.findById(id);
+        const lga = await LocalGovt.findById(id).populate('state');
 
         return response.status(201).send(lga);
     }
