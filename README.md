@@ -159,7 +159,10 @@ Attribution is appreciated but not required.
 
 ---
 
-## 🙌 Contributions
+## 🤝 Contributing
 
-Found an error or want to add metadata (region, postal codes, coordinates)?  
-PRs welcome!
+- ✅ Contributions are welcome!
+- ✅ Fork the repo
+- ✅ Create a feature branch
+- ✅ Commit your changes
+- ✅ Open a pull request
