@@ -7,7 +7,7 @@ Built with scalability, developer experience, and real-world usage in mind.
 
 ## 🚀 How to Use
 
-# 1️⃣ Get All States
+# Get All States
 
 GET ```/api/states```
 
@@ -33,7 +33,7 @@ GET ```/api/states```
 ```
 
 
-# 2️⃣ Get State By ID
+# Get State By ID
 
 GET ```/api/states/{id}```
 
