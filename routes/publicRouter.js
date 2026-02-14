@@ -27,13 +27,36 @@ router.get('/states/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const state = await State.findById(id)
+        const state = await State.findById(id);
+
+        return response.status(201).send(state);
+    }
+    catch (error) {
+        response.status(500).send({ message: error.message })
+    }
+})
+
+router.get('/states/:name/lgas', async (request, response) => {
+    try {
+        const { name } = request.params;
+
+        const state = await State.findOne({ name })
             .populate({
                 path: 'lgas',
                 select: ['name', '_id']
             }).exec();
 
-        return response.status(201).send(state);
+        let data = {
+            status: "success",
+            lgas: state.lgas,
+            state: {
+                name: state.name,
+                code: state.code,
+                id: state._id,
+            },
+        }
+
+        return response.status(201).send(data);
     }
     catch (error) {
         response.status(500).send({ message: error.message })
