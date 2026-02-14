@@ -37,6 +37,20 @@ to fetch single state:
 fetch("https://nigeria-states-council-apis.vercel.app/api/states/{id}").then(res => res.json());
 ```
 
+``` api response
+{
+    "_id": "697d57d86bb5383b07fca60d",
+    "name": "Abia",
+    "code": "AB",
+    "slogan": "God's Own State",
+    "__v": 0,
+    "capital_city": "Umuahia",
+    "creation_year": 1991,
+    "description": "Nulla harum beatae n",
+    "geo_zone": "South East"
+}
+```
+
 ---
 
 ## 📌 Use Cases
