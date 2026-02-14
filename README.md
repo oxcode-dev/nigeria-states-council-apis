@@ -7,12 +7,11 @@ Built with scalability, developer experience, and real-world usage in mind.
 
 ## 🚀 How to Use
 
-to fetch states:
-```js
-fetch("https://nigeria-states-council-apis.vercel.app/api/states").then(res => res.json());
-```
+# 1️⃣ Get All States
 
-``` api response
+GET ```/api/states```
+
+``` Response
 {
     "data": [
         {
@@ -32,12 +31,13 @@ fetch("https://nigeria-states-council-apis.vercel.app/api/states").then(res => r
     }
 }
 ```
-to fetch single state:
-```js
-fetch("https://nigeria-states-council-apis.vercel.app/api/states/{id}").then(res => res.json());
-```
 
-``` api response
+
+# 1️⃣ Get State By ID
+
+GET ```/api/states/{id}```
+
+``` Response
 {
     "_id": "697d57d86bb5383b07fca60d",
     "name": "Abia",
