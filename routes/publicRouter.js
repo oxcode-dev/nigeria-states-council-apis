@@ -43,7 +43,7 @@ router.get('/states/:name/lgas', async (request, response) => {
         const state = await State.findOne({ name })
             .populate({
                 path: 'lgas',
-                select: ['name', '_id']
+                // select: ['name', '_id']
             }).exec();
 
         let data = {
