@@ -147,7 +147,7 @@ GET ```/api/public/lgas```
 
 ### Get Local Government By ID
 
-GET ```/api/public/lgas```
+GET ```/api/public/lgas/{id}```
 
 ``` Response
 {
