@@ -151,23 +151,15 @@ GET ```/api/public/lgas```
 
 ``` Response
 {
-    "data": [
-        {
-            "_id": "697d57d86bb5383b07fca60d",
-            "name": "Abia",
-            "code": "AB",
-            "slogan": "God's Own State",
-            "__v": 0,
-            "capital_town": "Umuahia",
-            "creation_year": 1991,
-            "description": "Nulla harum beatae n",
-            "state_id": "697d57d86bb5383b07fca60d",
-        },
-        ...
-    ],
-    "metadata": {
-        "totalCount": 4
-    }
+    "_id": "697d57d86bb5383b07fca60d",
+    "name": "Abia",
+    "code": "AB",
+    "slogan": "God's Own State",
+    "__v": 0,
+    "capital_town": "Umuahia",
+    "creation_year": 1991,
+    "description": "Nulla harum beatae n",
+    "state_id": "697d57d86bb5383b07fca60d",
 }
 ```
 
