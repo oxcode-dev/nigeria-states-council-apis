@@ -49,7 +49,7 @@ app.use(limiter);
 //   res.render('index', { title: 'Express' });
 // });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join('public')));
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
