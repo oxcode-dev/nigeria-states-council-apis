@@ -92,7 +92,7 @@ GET ```/api/states-with-lgas```
 ```
 ### Get Local Government by state
 
-GET ```/api/states/:state/lgas```
+GET ```/api/public/states/:state/lgas```
 
 ``` Response
 {
@@ -121,7 +121,7 @@ GET ```/api/states/:state/lgas```
 
 ### Get All Local Governments
 
-GET ```/api/lgas```
+GET ```/api/public/lgas```
 
 ``` Response
 {
