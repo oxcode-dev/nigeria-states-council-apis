@@ -4,6 +4,187 @@
     <title>My Node.js Page</title>
 </head>
 <body>
-    <h1>Hello from Node.js!</h1>
+    <h1 id="-nigeria-states-and-local-government-api-built-with-nodejs-expressjs-and-mongodb">🇳🇬 Nigeria States and Local Government API built with NodeJS, ExpressJS and MongoDB</h1>
+<p>A simple and fast REST API providing all <strong>Nigeria states, the Federal Capital Territory (FCT), and Local Government Areas (LGAs)</strong>.<br>Built with scalability, developer experience, and real-world usage in mind.</p>
+<hr>
+<h2 id="-how-to-use">🚀 How to Use</h2>
+<h3 id="base-url">Base URL</h3>
+<pre><code class="lang-https://nigeria-states-council-apis.vercel.app/```">
+### Get All States
+
+GET ```/api/public/states
+</code></pre>
+<pre><code class="lang-Response">{
+    <span class="hljs-attr">"data"</span>: [
+        {
+            <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Abia"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"AB"</span>,
+            <span class="hljs-attr">"slogan"</span>: <span class="hljs-string">"God's Own State"</span>,
+            <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"capital_city"</span>: <span class="hljs-string">"Umuahia"</span>,
+            <span class="hljs-attr">"creation_year"</span>: <span class="hljs-number">1991</span>,
+            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Nulla harum beatae n"</span>,
+            <span class="hljs-attr">"geo_zone"</span>: <span class="hljs-string">"South East"</span>
+        },
+    ...],
+    <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"totalCount"</span>: <span class="hljs-number">4</span>
+    }
+}
+</code></pre>
+<h3 id="get-state-by-id">Get State By ID</h3>
+<p>GET <code>/api/public/states/{id}</code></p>
+<pre><code class="lang-Response">{
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Abia"</span>,
+    <span class="hljs-attr">"code"</span>: <span class="hljs-string">"AB"</span>,
+    <span class="hljs-attr">"slogan"</span>: <span class="hljs-string">"God's Own State"</span>,
+    <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"capital_city"</span>: <span class="hljs-string">"Umuahia"</span>,
+    <span class="hljs-attr">"creation_year"</span>: <span class="hljs-number">1991</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Nulla harum beatae n"</span>,
+    <span class="hljs-attr">"geo_zone"</span>: <span class="hljs-string">"South East"</span>
+}
+</code></pre>
+<h3 id="get-all-states-with-lgas">Get All States With LGAs</h3>
+<p>GET <code>/api/public/states-with-lgas</code></p>
+<pre><code class="lang-Response">{
+    <span class="hljs-attr">"data"</span>: [
+        {
+            <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Abia"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"AB"</span>,
+            <span class="hljs-attr">"slogan"</span>: <span class="hljs-string">"God's Own State"</span>,
+            <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"capital_city"</span>: <span class="hljs-string">"Umuahia"</span>,
+            <span class="hljs-attr">"creation_year"</span>: <span class="hljs-number">1991</span>,
+            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Nulla harum beatae n"</span>,
+            <span class="hljs-attr">"geo_zone"</span>: <span class="hljs-string">"South East"</span>
+            <span class="hljs-string">"lgas"</span>: [
+                {
+                    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"6985f4251d00bd7a3fa15bfc"</span>,
+                    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Marcia Perkins"</span>,
+                    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Placeat pariatur N"</span>,
+                    <span class="hljs-attr">"code"</span>: <span class="hljs-string">"Ut exercitation quas"</span>,
+                    <span class="hljs-attr">"slogan"</span>: <span class="hljs-string">"Necessitatibus volup"</span>,
+                    <span class="hljs-attr">"capital_town"</span>: <span class="hljs-string">"Quos provident ut e"</span>,
+                    <span class="hljs-attr">"state_id"</span>: <span class="hljs-string">"698378bf23b225abd6efa970"</span>,
+                    <span class="hljs-attr">"creation_year"</span>: <span class="hljs-number">2007</span>,
+                    <span class="hljs-attr">"state"</span>: <span class="hljs-string">"698378bf23b225abd6efa970"</span>,
+                    <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+                },
+                ...
+            ]
+        },
+        ...
+    ],
+    <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"totalCount"</span>: <span class="hljs-number">4</span>
+    }
+}
+</code></pre>
+<h3 id="get-local-government-by-state">Get Local Government by state</h3>
+<p>GET <code>/api/public/states/:state/lgas</code></p>
+<pre><code class="lang-Response">{
+    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"success"</span>,
+    <span class="hljs-attr">"lgas"</span>: [
+        {
+            <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Abia"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"AB"</span>,
+            <span class="hljs-attr">"slogan"</span>: <span class="hljs-string">"God's Own State"</span>,
+            <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"capital_town"</span>: <span class="hljs-string">"Umuahia"</span>,
+            <span class="hljs-attr">"creation_year"</span>: <span class="hljs-number">1991</span>,
+            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Nulla harum beatae n"</span>,
+            <span class="hljs-attr">"state_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+        },
+        ...
+    ],
+    <span class="hljs-attr">"state"</span>: {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Lucas Osborn"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"Maxime harum distinc"</span>,
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>
+    },
+}
+</code></pre>
+<h3 id="get-all-local-governments">Get All Local Governments</h3>
+<p>GET <code>/api/public/lgas</code></p>
+<pre><code class="lang-Response">{
+    <span class="hljs-attr">"data"</span>: [
+        {
+            <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Abia"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"AB"</span>,
+            <span class="hljs-attr">"slogan"</span>: <span class="hljs-string">"God's Own State"</span>,
+            <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"capital_town"</span>: <span class="hljs-string">"Umuahia"</span>,
+            <span class="hljs-attr">"creation_year"</span>: <span class="hljs-number">1991</span>,
+            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Nulla harum beatae n"</span>,
+            <span class="hljs-attr">"state_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+        },
+        ...
+    ],
+    <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"totalCount"</span>: <span class="hljs-number">4</span>
+    }
+}
+</code></pre>
+<h3 id="get-local-government-by-id">Get Local Government By ID</h3>
+<p>GET <code>/api/public/lgas/{id}</code></p>
+<pre><code class="lang-Response">{
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Abia"</span>,
+    <span class="hljs-attr">"code"</span>: <span class="hljs-string">"AB"</span>,
+    <span class="hljs-attr">"slogan"</span>: <span class="hljs-string">"God's Own State"</span>,
+    <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"capital_town"</span>: <span class="hljs-string">"Umuahia"</span>,
+    <span class="hljs-attr">"creation_year"</span>: <span class="hljs-number">1991</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Nulla harum beatae n"</span>,
+    <span class="hljs-attr">"state_id"</span>: <span class="hljs-string">"697d57d86bb5383b07fca60d"</span>,
+}
+</code></pre>
+<hr>
+<h2 id="-use-cases">📌 Use Cases</h2>
+<ul>
+<li>✅ Election &amp; civic apps</li>
+<li>✅ Forms (state/LGA dropdowns)</li>
+<li>✅ Data (Address) validation for forms</li>
+<li>✅ Location-based services in Nigeria</li>
+<li>✅ Government, fintech, health, education, &amp; NGO apps</li>
+</ul>
+<hr>
+<h2 id="-features">🚀 Features</h2>
+<ul>
+<li>✅ List all Nigerian states and some details about them</li>
+<li>✅ List all Nigerian Local Governments and some details about them</li>
+<li>✅ Get LGAs by state</li>
+<li>✅ Includes FCT (Abuja)</li>
+<li>✅ Lightweight &amp; fast</li>
+<li>✅ JSON responses</li>
+<li>✅ Easy to integrate</li>
+</ul>
+<hr>
+<h2 id="-tech-stack">🧱 Tech Stack</h2>
+<ul>
+<li>✅ Node.js</li>
+<li>✅ Express.js</li>
+<li>✅ MongoDB</li>
+<li>✅ REST architecture</li>
+</ul>
+<hr>
+<h2 id="-license">📜 License</h2>
+<p><strong>MIT</strong> – free to use, modify, and distribute.<br>Attribution is appreciated but not required.</p>
+<hr>
+<h2 id="-contributing">🤝 Contributing</h2>
+<ul>
+<li>✅ Contributions are welcome!</li>
+<li>✅ Fork the repo</li>
+<li>✅ Create a feature branch</li>
+<li>✅ Commit your changes</li>
+<li>✅ Open a pull request</li>
+</ul>
+    
 </body>
 </html>

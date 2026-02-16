@@ -8,7 +8,9 @@ Built with scalability, developer experience, and real-world usage in mind.
 ## 🚀 How to Use
 
 ### Base URL
-```https://nigeria-states-council-apis.vercel.app/```
+```
+    https://nigeria-states-council-apis.vercel.app/
+```
 
 ### Get All States
 
