@@ -44,7 +44,8 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.get('/', (req, res) => {
-  res.send('Hello World from Express!', req);
+  // res.send('Hello World from Express!', req);
+  res.render('index', { title: 'Express' });
 });
 
 app.listen(port, () => {
