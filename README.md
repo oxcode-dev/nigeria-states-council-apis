@@ -9,7 +9,7 @@ Built with scalability, developer experience, and real-world usage in mind.
 
 ### Get All States
 
-GET ```/api/states```
+GET ```/api/public/states```
 
 ``` Response
 {
@@ -34,7 +34,7 @@ GET ```/api/states```
 
 ### Get State By ID
 
-GET ```/api/states/{id}```
+GET ```/api/public/states/{id}```
 
 ``` Response
 {
@@ -125,8 +125,7 @@ GET ```/api/public/lgas```
 
 ``` Response
 {
-    "status": "success",
-    "lgas": [
+    "data": [
         {
             "_id": "697d57d86bb5383b07fca60d",
             "name": "Abia",
@@ -140,11 +139,9 @@ GET ```/api/public/lgas```
         },
         ...
     ],
-    "state": {
-        "name": "Lucas Osborn",
-        "code": "Maxime harum distinc",
-        "id": "697d57d86bb5383b07fca60d"
-    },
+    "metadata": {
+        "totalCount": 4
+    }
 }
 ```
 
