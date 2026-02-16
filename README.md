@@ -119,6 +119,35 @@ GET ```/api/states/:state/lgas```
 }
 ```
 
+### Get All Local Governments
+
+GET ```/api/lgas```
+
+``` Response
+{
+    "status": "success",
+    "lgas": [
+        {
+            "_id": "697d57d86bb5383b07fca60d",
+            "name": "Abia",
+            "code": "AB",
+            "slogan": "God's Own State",
+            "__v": 0,
+            "capital_town": "Umuahia",
+            "creation_year": 1991,
+            "description": "Nulla harum beatae n",
+            "state_id": "697d57d86bb5383b07fca60d",
+        },
+        ...
+    ],
+    "state": {
+        "name": "Lucas Osborn",
+        "code": "Maxime harum distinc",
+        "id": "697d57d86bb5383b07fca60d"
+    },
+}
+```
+
 ---
 
 ## 📌 Use Cases
