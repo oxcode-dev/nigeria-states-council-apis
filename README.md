@@ -52,7 +52,7 @@ GET ```/api/states/{id}```
 
 ### Get All States With LGAs
 
-GET ```/api/states-with-lgas```
+GET ```/api/public/states-with-lgas```
 
 ``` Response
 {
