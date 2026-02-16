@@ -13,6 +13,7 @@ import connectDB from "./config/db.js"
 import { profileRouter } from "./controllers/profileController.js"
 import { passwordResetRouter } from "./controllers/passwordResetController.js"
 import rateLimit from "express-rate-limit"
+import path from "path"
 
 config();
 
@@ -43,10 +44,12 @@ const limiter = rateLimit({
 // Apply the rate limiter to all requests
 app.use(limiter);
 
-app.get('/', (req, res) => {
-  // res.send('Hello World from Express!', req);
-  res.render('index', { title: 'Express' });
-});
+// app.get('/', (req, res) => {
+//   // res.send('Hello World from Express!', req);
+//   res.render('index', { title: 'Express' });
+// });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
