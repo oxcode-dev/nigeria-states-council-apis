@@ -13,7 +13,7 @@ import connectDB from "./config/db.js"
 import { profileRouter } from "./controllers/profileController.js"
 import { passwordResetRouter } from "./controllers/passwordResetController.js"
 import rateLimit from "express-rate-limit"
-import path from "path"
+import { join } from "path"
 
 config();
 
@@ -49,7 +49,7 @@ app.use(limiter);
 //   res.render('index', { title: 'Express' });
 // });
 
-app.use(express.static(path.join('public')));
+app.use(express.static(join('public')));
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
