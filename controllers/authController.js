@@ -9,6 +9,13 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
     try {
         const { email, password, first_name, last_name } = req.body;
+
+        if(!first_name || !last_name || !email || !password) {
+            return res.status(400).json({
+                message: "Required fields are missing!",
+            })
+        }
+
         const userExists = await User.findOne({ email });
 
         if(userExists) {
@@ -49,6 +56,13 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        if(!email || !password) {
+            return res.status(400).json({
+                message: "Required fields are missing!",
+            })
+        }
+
         const user = await User.findOne({ email });
 
         if(!user) {
