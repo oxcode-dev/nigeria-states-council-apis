@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/user.js';
+import { auth } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -105,7 +106,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.delete('/logout', async (req, res) => {
+router.delete('/logout', auth , async (req, res) => {
     try {
         // Clearing JWT cookie
         res.cookie("jwt", "", { maxAge: 0 });
