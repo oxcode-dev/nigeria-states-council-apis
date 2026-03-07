@@ -21,7 +21,9 @@ config();
 const app = express();
 const port = 3000;
 
-app.use(cookieParser('secret'));
+app.use(express.json());
+
+app.use(cookieParser());
 
 const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -59,8 +61,6 @@ app.listen(port, () => {
 });
 
 connectDB();
-
-app.use(express.json());
 
 app.use('/api/states', statesRouter)
 app.use('/api/lgas', lgasRouter)
