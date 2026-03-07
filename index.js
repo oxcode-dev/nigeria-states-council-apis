@@ -14,11 +14,14 @@ import { profileRouter } from "./controllers/profileController.js"
 import { passwordResetRouter } from "./controllers/passwordResetController.js"
 import rateLimit from "express-rate-limit"
 import { join } from "path"
+import cookieParser from "cookie-parser"
 
 config();
 
 const app = express();
 const port = 3000;
+
+app.use(cookieParser());
 
 const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],

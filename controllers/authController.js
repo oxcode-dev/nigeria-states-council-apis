@@ -139,14 +139,19 @@ router.delete('/logout', auth , async (req, res) => {
 
 router.post('/refresh_token', async (req, res) => {
     try {
-        const rf_token = req.cookies//.refreshtoken;
-        return res.status(200).json({ msg: rf_token });
+        res.cookie("refreshtoken", 'refresh_token', {
+            httpOnly: true,
+            path: "/api/auth/refresh_token",
+            sameSite: 'lax',
+            maxAge: 30 * 24 * 60 * 60 * 1000, //validity of 30 days
+        });
+        const refresh_token = req.cookies.refreshtoken;
 
-        if (!rf_token) {
+        if (!refresh_token) {
             return res.status(400).json({ msg: "Please login again." });
         }
         jwt.verify(
-            rf_token,
+            refresh_token,
             process.env.REFRESH_TOKEN_SECRET,
             async (err, result) => {
                 if (err) {
