@@ -127,7 +127,7 @@ router.post('/login', async (req, res) => {
 router.delete('/logout', auth , async (req, res) => {
     try {
         // Clearing JWT cookie
-        res.cookie("jwt", "", { maxAge: 0 });
+        res.cookie("refreshtoken", "", { maxAge: 0 });
         // Sending success response
         res.status(201).json({ message: "Logged out successfully" });
     } catch (error) {
@@ -142,23 +142,28 @@ router.post('/refresh_token', async (req, res) => {
         res.cookie("refreshtoken", 'refresh_token', {
             httpOnly: true,
             path: "/api/auth/refresh_token",
-            sameSite: 'lax',
+            sameSite: 'none',
+            secure: false,
             maxAge: 30 * 24 * 60 * 60 * 1000, //validity of 30 days
         });
-        const refresh_token = req.cookies.refreshtoken;
 
+        // const refresh_token = req.cookies?.refreshtoken;
+        const refresh_token = req.cookies['refreshtoken']
+        return res.status(201).json({ msg: refresh_token})
+        
         if (!refresh_token) {
             return res.status(400).json({ msg: "Please login again." });
         }
+
         jwt.verify(
             refresh_token,
-            process.env.REFRESH_TOKEN_SECRET,
+            process.env.JWT_SECRET,
             async (err, result) => {
                 if (err) {
-                    res.status(400).json({ msg: "Please login again." });
+                    res.status(401).json({ msg: "Please login again." });
                 }
 
-                const user = await Users.findById(result.id)
+                const user = await User.findById(result.id)
                     .select("-password")
                     .populate("followers following", "-password");
 
