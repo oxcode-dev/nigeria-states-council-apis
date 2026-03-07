@@ -148,7 +148,7 @@ router.post('/refresh_token', async (req, res) => {
         });
 
         // const refresh_token = req.cookies?.refreshtoken;
-        const refresh_token = req.cookies['refreshtoken']
+        const refresh_token = req.signedCookies?.refreshtoken || 'token'
         return res.status(201).json({ msg: refresh_token})
         
         if (!refresh_token) {
