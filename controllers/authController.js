@@ -35,6 +35,14 @@ router.post('/register', async (req, res) => {
         const savedUser = await newUser.save();
 
         const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: '24h'});
+        const refresh_token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '30d'});
+
+        res.cookie("refreshtoken", refresh_token, {
+            httpOnly: true,
+            path: "/api/auth/refresh_token",
+            sameSite: 'lax',
+            maxAge: 30 * 24 * 60 * 60 * 1000, //validity of 30 days
+        });
 
         return res.status(201).json({
             token, 
@@ -81,10 +89,20 @@ router.post('/login', async (req, res) => {
             email: user.email,
             isAdmin: user.isAdmin,
         }
+
+        const refresh_token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '30d'});
+
+        res.cookie("refreshtoken", refresh_token, {
+            httpOnly: true,
+            path: "/api/auth/refresh_token",
+            sameSite: 'lax',
+            maxAge: 30 * 24 * 60 * 60 * 1000, //validity of 30 days
+        });
+
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: 3600*24},
+            { expiresIn: '24h'},
             (error, token) => {
                 if(error) throw error;
 
@@ -119,8 +137,37 @@ router.delete('/logout', auth , async (req, res) => {
     }
 });
 
-router.post('/refresh-token', async (req, res) => {
+router.post('/refresh_token', async (req, res) => {
+    try {
+        const rf_token = req.cookies//.refreshtoken;
+        return res.status(200).json({ msg: rf_token });
 
+        if (!rf_token) {
+            return res.status(400).json({ msg: "Please login again." });
+        }
+        jwt.verify(
+            rf_token,
+            process.env.REFRESH_TOKEN_SECRET,
+            async (err, result) => {
+                if (err) {
+                    res.status(400).json({ msg: "Please login again." });
+                }
+
+                const user = await Users.findById(result.id)
+                    .select("-password")
+                    .populate("followers following", "-password");
+
+                if (!user) {
+                    res.status(400).json({ msg: "User does not exist." });
+                }
+
+                const access_token = createAccessToken({ id: result.id });
+                res.json({ access_token, user });
+            }
+        );
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
 });
 
 export { router as authRouter };
