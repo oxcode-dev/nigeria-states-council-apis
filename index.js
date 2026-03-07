@@ -21,7 +21,7 @@ config();
 const app = express();
 const port = 3000;
 
-app.use(cookieParser());
+app.use(cookieParser('secret'));
 
 const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
