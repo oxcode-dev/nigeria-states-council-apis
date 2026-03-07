@@ -119,4 +119,8 @@ router.delete('/logout', auth , async (req, res) => {
     }
 });
 
+router.post('/refresh-token', async (req, res) => {
+
+});
+
 export { router as authRouter };
