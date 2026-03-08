@@ -141,7 +141,7 @@ router.delete('/logout', auth , async (req, res) => {
 router.post('/refresh_token', async (req, res) => {
     try {
         const refresh_token = req.cookies['refreshtoken']
-        return res.status(201).json({ msg: refresh_token})
+        // return res.status(201).json({ msg: refresh_token})
         
         if (!refresh_token) {
             return res.status(400).json({ msg: "Please login again." });
