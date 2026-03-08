@@ -128,6 +128,7 @@ router.delete('/logout', auth , async (req, res) => {
     try {
         // Clearing JWT cookie
         res.cookie("refreshtoken", "", { maxAge: 0 });
+        res.clearCookie("refreshToken")
         // Sending success response
         res.status(201).json({ message: "Logged out successfully" });
     } catch (error) {
@@ -139,16 +140,7 @@ router.delete('/logout', auth , async (req, res) => {
 
 router.post('/refresh_token', async (req, res) => {
     try {
-        res.cookie("refreshtoken", 'refresh_token', {
-            httpOnly: true,
-            path: "/api/auth/refresh_token",
-            sameSite: 'none',
-            secure: false,
-            maxAge: 30 * 24 * 60 * 60 * 1000, //validity of 30 days
-        });
-
-        // const refresh_token = req.cookies?.refreshtoken;
-        const refresh_token = await req.cookies?.refreshtoken || 'token'
+        const refresh_token = req.cookies['refreshtoken']
         return res.status(201).json({ msg: refresh_token})
         
         if (!refresh_token) {
