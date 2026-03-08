@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/user.js';
 import { auth } from '../middlewares/authMiddleware.js';
+import * as cookie from 'cookie';
 
 const router = express.Router();
 
@@ -140,8 +141,19 @@ router.delete('/logout', auth , async (req, res) => {
 
 router.post('/refresh_token', async (req, res) => {
     try {
-        const refresh_token = req.cookies['refreshtoken']
-        // return res.status(201).json({ msg: refresh_token})
+        const refresh_token = 'token'; //req.cookies['refreshtoken']
+        
+        res.setHeader(
+            "Set-Cookie",
+            cookie.stringifySetCookie({
+                name: "refreshtoken",
+                value: String(refresh_token),
+                httpOnly: true,
+                maxAge: 60 * 60 * 24 * 7, // 1 week
+            }),
+        );
+        var cookies = cookie.parseCookie(req.headers.cookie || "");
+        return res.status(201).json({ msg: JSON.stringify(cookies)})
         
         if (!refresh_token) {
             return res.status(400).json({ msg: "Please login again." });
