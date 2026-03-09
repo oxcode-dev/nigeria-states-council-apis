@@ -139,7 +139,7 @@ router.delete('/logout', auth , async (req, res) => {
     }
 });
 
-router.get('/refresh_token', async (req, res) => {
+router.post('/refresh_token', async (req, res) => {
     try {
         const refresh_token = 'token'; //req.cookies['refreshtoken']
 
