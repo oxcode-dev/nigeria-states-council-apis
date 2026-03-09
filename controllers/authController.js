@@ -93,12 +93,20 @@ router.post('/login', async (req, res) => {
 
         const refresh_token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '30d'});
 
-        res.cookie("refreshtoken", refresh_token, {
-            httpOnly: true,
-            path: "/api/auth/refresh_token",
-            sameSite: 'lax',
-            maxAge: 30 * 24 * 60 * 60 * 1000, //validity of 30 days
-        });
+        // res.cookie("refreshtoken", refresh_token, {
+        //     httpOnly: true,
+        //     path: "/api/auth/refresh_token",
+        //     sameSite: 'lax',
+        // });
+        res.setHeader(
+            "Set-Cookie",
+            cookie.stringifySetCookie({
+                name: "refreshtoken",
+                value: refresh_token,
+                httpOnly: true,
+                maxAge: 30 * 24 * 60 * 60 * 1000, //validity of 30 days
+            }),
+        );
 
         jwt.sign(
             payload,
@@ -143,19 +151,19 @@ router.post('/refresh_token', async (req, res) => {
     try {
         const refresh_token = 'token'; //req.cookies['refreshtoken']
 
-        res.setHeader(
-            "Set-Cookie",
-            cookie.stringifySetCookie({
-                name: "refreshtoken",
-                value: String(refresh_token),
-                httpOnly: true,
-                maxAge: 60 * 60 * 24 * 7, // 1 week
-            }),
-        );
+        // res.setHeader(
+        //     "Set-Cookie",
+        //     cookie.stringifySetCookie({
+        //         name: "refreshtoken",
+        //         value: String(refresh_token),
+        //         httpOnly: true,
+        //         maxAge: 60 * 60 * 24 * 7, // 1 week
+        //     }),
+        // );
         // cookie.parseSetCookie("foo=bar; httpOnly");
         
         var cookies = cookie.parseCookie(req.headers.cookie || "");
-        return res.status(201).json({ msg: JSON.stringify(cookies)})
+        return res.status(201).json({ msg: cookies})
         
         if (!refresh_token) {
             return res.status(400).json({ msg: "Please login again." });
