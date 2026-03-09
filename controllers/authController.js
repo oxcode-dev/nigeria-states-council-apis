@@ -142,7 +142,7 @@ router.delete('/logout', auth , async (req, res) => {
 router.post('/refresh_token', async (req, res) => {
     try {
         const refresh_token = 'token'; //req.cookies['refreshtoken']
-        
+
         res.setHeader(
             "Set-Cookie",
             cookie.stringifySetCookie({
@@ -152,6 +152,8 @@ router.post('/refresh_token', async (req, res) => {
                 maxAge: 60 * 60 * 24 * 7, // 1 week
             }),
         );
+        cookie.parseSetCookie("foo=bar; httpOnly");
+        
         var cookies = cookie.parseCookie(req.headers.cookie || "");
         return res.status(201).json({ msg: JSON.stringify(cookies)})
         
