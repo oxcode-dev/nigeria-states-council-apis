@@ -152,7 +152,7 @@ router.post('/refresh_token', async (req, res) => {
                 maxAge: 60 * 60 * 24 * 7, // 1 week
             }),
         );
-        cookie.parseSetCookie("foo=bar; httpOnly");
+        // cookie.parseSetCookie("foo=bar; httpOnly");
         
         var cookies = cookie.parseCookie(req.headers.cookie || "");
         return res.status(201).json({ msg: JSON.stringify(cookies)})
