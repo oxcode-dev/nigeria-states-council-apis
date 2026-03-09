@@ -149,21 +149,21 @@ router.delete('/logout', auth , async (req, res) => {
 
 router.post('/refresh_token', async (req, res) => {
     try {
-        const refresh_token = 'token'; //req.cookies['refreshtoken']
+        const refresh_token = req.cookies['refreshtoken']
 
-        // res.setHeader(
-        //     "Set-Cookie",
-        //     cookie.stringifySetCookie({
-        //         name: "refreshtoken",
-        //         value: String(refresh_token),
-        //         httpOnly: true,
-        //         maxAge: 60 * 60 * 24 * 7, // 1 week
-        //     }),
-        // );
-        // cookie.parseSetCookie("foo=bar; httpOnly");
+        // // res.setHeader(
+        // //     "Set-Cookie",
+        // //     cookie.stringifySetCookie({
+        // //         name: "refreshtoken",
+        // //         value: String(refresh_token),
+        // //         httpOnly: true,
+        // //         maxAge: 60 * 60 * 24 * 7, // 1 week
+        // //     }),
+        // // );
+        // // cookie.parseSetCookie("foo=bar; httpOnly");
         
-        var cookies = cookie.parseCookie(req.headers.cookie || "");
-        return res.status(201).json({ msg: cookies})
+        // var cookies = cookie.parseCookie(req.headers?.cookie || "");
+        // return res.status(201).json({ msg: refresh_token})   
         
         if (!refresh_token) {
             return res.status(400).json({ msg: "Please login again." });
