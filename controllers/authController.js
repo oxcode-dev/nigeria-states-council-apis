@@ -146,10 +146,8 @@ router.delete('/logout', auth , async (req, res) => {
             }),
         );
 
-        const refresh_token = req.cookies['refreshtoken']
-        
         // Sending success response
-        res.status(201).json({ message: "Logged out successfully", refresh_token });
+        res.status(201).json({ message: "Logged out successfully" });
     } catch (error) {
         // Handling errors
         console.log("Error in logout controller", error.message);
