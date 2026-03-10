@@ -136,9 +136,9 @@ router.post('/login', async (req, res) => {
 router.delete('/logout', auth , async (req, res) => {
     try {
         // Clearing JWT cookie
-        res.cookie("refreshtoken", "", { maxAge: 0 });
-        res.clearCookie("refreshtoken")
-        res.clearCookie('refreshtoken', { httpOnly: true, secure: true });
+        // res.cookie("refreshtoken", "", { maxAge: 0 });
+        // res.clearCookie("refreshtoken")
+        // res.clearCookie('refreshtoken', { httpOnly: true, secure: true });
 
         res.setHeader(
             "Set-Cookie",
