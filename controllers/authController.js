@@ -137,9 +137,23 @@ router.delete('/logout', auth , async (req, res) => {
     try {
         // Clearing JWT cookie
         res.cookie("refreshtoken", "", { maxAge: 0 });
-        res.clearCookie("refreshToken")
+        res.clearCookie("refreshtoken")
+        res.clearCookie('refreshtoken', { httpOnly: true, secure: true });
+
+        res.setHeader(
+            "Set-Cookie",
+            cookie.stringifySetCookie({
+                name: "refreshtoken",
+                value: '',
+                httpOnly: true,
+                maxAge: 0 //30 * 24 * 60 * 60 * 1000, //validity of 30 days
+            }),
+        );
+
+        const refresh_token = req.cookies['refreshtoken']
+        
         // Sending success response
-        res.status(201).json({ message: "Logged out successfully" });
+        res.status(201).json({ message: "Logged out successfully", refresh_token });
     } catch (error) {
         // Handling errors
         console.log("Error in logout controller", error.message);
@@ -150,20 +164,6 @@ router.delete('/logout', auth , async (req, res) => {
 router.post('/refresh_token', async (req, res) => {
     try {
         const refresh_token = req.cookies['refreshtoken']
-
-        // // res.setHeader(
-        // //     "Set-Cookie",
-        // //     cookie.stringifySetCookie({
-        // //         name: "refreshtoken",
-        // //         value: String(refresh_token),
-        // //         httpOnly: true,
-        // //         maxAge: 60 * 60 * 24 * 7, // 1 week
-        // //     }),
-        // // );
-        // // cookie.parseSetCookie("foo=bar; httpOnly");
-        
-        // var cookies = cookie.parseCookie(req.headers?.cookie || "");
-        // return res.status(201).json({ msg: refresh_token})   
         
         if (!refresh_token) {
             return res.status(400).json({ msg: "Please login again." });
@@ -178,15 +178,20 @@ router.post('/refresh_token', async (req, res) => {
                 }
 
                 const user = await User.findById(result.id)
-                    .select("-password")
-                    .populate("followers following", "-password");
+                    .select("-password");
 
                 if (!user) {
                     res.status(400).json({ msg: "User does not exist." });
                 }
 
-                const access_token = createAccessToken({ id: result.id });
-                res.json({ access_token, user });
+                const payload = { 
+                    id: user._id,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                }
+
+                const access_token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h'});
+                res.json({ access_token });
             }
         );
     } catch (err) {
